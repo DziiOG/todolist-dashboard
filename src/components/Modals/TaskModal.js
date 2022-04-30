@@ -5,7 +5,7 @@ import { useFormik } from 'formik'
 import { TaskSchema } from 'helpers/validation'
 import { Grid, GridItem } from '@chakra-ui/react'
 import { FormInput, FormSelect, FormTextarea } from 'components/Form'
-import { CalendarFeather, FeatherRepeat } from 'theme/custom-icons'
+import { CalendarFeather, FeatherRepeat, Priority } from 'theme/custom-icons'
 import { rem } from 'helpers/misc'
 import ModalWrapper from './ModalWrapper'
 
@@ -118,11 +118,11 @@ const TaskModal = () => {
         </GridItem>
       </Grid>
       <Grid w='100%' gap={5} mb={{ md: 5 }} templateColumns='repeat(2, 1fr)'>
-        <GridItem>
+        <GridItem h='100%'>
           <FormTextarea
             label='Description'
             placeholder='Add description'
-            h='100%'
+            h={{ ...rem(140) }}
             required
             id='description'
             name='description'
@@ -139,7 +139,7 @@ const TaskModal = () => {
             <GridItem>
               <FormSelect
                 required
-                leftIcon={FeatherRepeat}
+                leftIcon={Priority}
                 label='Priority'
                 hasSpan
                 spanInfo='(Optional)'

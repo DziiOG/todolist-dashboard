@@ -9,8 +9,9 @@ export const CategorySchema = Yup.object().shape({
 export const TaskSchema = Yup.object().shape({
   user: Yup.string().required('User is required'),
   name: Yup.string().required('Name is required'),
-  frequency: Yup.string(),
+  frequency: Yup.string().required(),
   priority: Yup.string(),
+  description: Yup.string().required('Description is required'),
   dueDate: Yup.date().required('Due Date is required'),
   category: Yup.string().required()
 })

@@ -14,7 +14,15 @@ const FormTextArea = ({
 }) => (
   <FormControl id={rest.id || rest.name} isRequired={required}>
     <Flex color='gray.500'>
-      <FormLabel fontSize='sm'>{label}</FormLabel>
+      <FormLabel
+        fontSize='lg'
+        fontFamily='Avenir'
+        color='#29325a'
+        fontWeight={500}
+        fontStyle={'normal'}
+      >
+        {label}
+      </FormLabel>
       {hasSpan && (
         <Text fontSize='xs' mt={0.5} ml={-2}>
           {spanInfo}{' '}
@@ -23,7 +31,6 @@ const FormTextArea = ({
     </Flex>
     <Textarea
       rounded='md'
-      minH={12}
       size='sm'
       _focus={{ borderColor: 'cf.400' }}
       {...rest}
