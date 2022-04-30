@@ -3,6 +3,7 @@ import { Box } from '@chakra-ui/react'
 import PropTypes from 'prop-types'
 import t from 'typy'
 import useComponents from 'context/useComponent'
+import { rem } from 'helpers/misc'
 
 const TableContent = ({
   renderer,
@@ -17,9 +18,10 @@ const TableContent = ({
   return (
     <Box
       overflowX='scroll'
+      bg={index % 2 === 0 ? '#F2F5FF66 0% 0% no-repeat padding-box;' : 'white'}
       as='tr'
+      borderRadius={{ ...rem(10) }}
       fontSize='md'
-      borderBottom='1px solid #E2E8F0'
       cursor={isClickable ? 'pointer' : 'inherit'}
       onClick={
         isClickable ? () => toggleModal(clickableState, null, item) : undefined
@@ -32,9 +34,12 @@ const TableContent = ({
             key={mapKey(i)}
             as='td'
             p={4}
+            py={{ md: 6 }}
+            fontStyle='normal'
+            fontFamily='Avenir'
             whiteSpace='nowrap'
             lineHeight={5}
-            color='gray.800'
+            color='#29325A'
           >
             {typeof selector?.selector === 'string' &&
               selector?.selector === 'numbering' &&

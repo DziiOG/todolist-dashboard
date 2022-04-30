@@ -48,10 +48,12 @@ const TableHead = ({
               textAlign='left'
               fontSize='md'
               lineHeight={4}
+              fontFamily='Avenir'
+              fontStyle='normal'
               textTransform='capitalize'
               wordSpacing='wider'
               whiteSpace='nowrap'
-              fontWeight={500}
+              fontWeight={900}
             >
               {item?.name}
             </Box>
