@@ -16,7 +16,7 @@ import {
 import { Bell, ChevronDown, Search } from 'theme/custom-icons'
 import { rem } from 'helpers/misc'
 
-export const SearchInput = () => (
+export const SearchInput = ({ ...rest }) => (
   <InputGroup
     border='transparent'
     outline='none'
@@ -24,12 +24,14 @@ export const SearchInput = () => (
     _hover={{ outline: 'none' }}
     borderRadius={{ ...rem(10) }}
     bg='#F2F5FF 0% 0% no-repeat padding-box;'
-    w={{ ...rem(497) }}
+    w={rest.w || { ...rem(497) }}
+    h={rest.h}
   >
-    <InputLeftElement pointerEvents='none'>
+    <InputLeftElement h={rest.h} pointerEvents='none'>
       <Icon as={Search} color='#29325A66' />
     </InputLeftElement>
     <Input
+      h={rest.h}
       fontSize='sm'
       _placeholder={{
         fontSize: 'sm',

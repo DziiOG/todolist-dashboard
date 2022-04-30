@@ -15,6 +15,51 @@ export const ChevronDown = createIcon({
   )
 })
 
+export const MultipleOutline = createIcon({
+  displayName: 'MultipleOutline',
+  viewBox: '0 0 24 24',
+  path: (
+    <g
+      id='MDI_clipboard-check-multiple-outline'
+      data-name='MDI / clipboard-check-multiple-outline'
+      transform='translate(-4571 -1286)'
+    >
+      <g
+        id='Boundary'
+        transform='translate(4571 1286)'
+        fill='currentColor'
+        stroke='rgba(0,0,0,0)'
+        strokeWidth='1'
+        opacity='0'
+      >
+        <rect width='24' height='24' stroke='none' />
+        <rect x='0.5' y='0.5' width='23' height='23' fill='none' />
+      </g>
+      <path
+        id='Path_clipboard-check-multiple-outline'
+        data-name='Path / clipboard-check-multiple-outline'
+        d='M4,7V21H18v2H4a2.006,2.006,0,0,1-2-2V7H4m8.8,8.35-3.3-3.3,1.4-1.4,1.9,1.9,4.3-4.3,1.4,1.4-5.7,5.7M20,3a2.006,2.006,0,0,1,2,2V17a2.006,2.006,0,0,1-2,2H8a2.006,2.006,0,0,1-2-2V5A2.006,2.006,0,0,1,8,3h3.18a2.988,2.988,0,0,1,5.64,0H20M14,3a1,1,0,1,0,1,1,1,1,0,0,0-1-1M10,7V5H8V17H20V5H18V7Z'
+        transform='translate(4571 1286)'
+        fill='currentColor'
+      />
+    </g>
+  )
+})
+
+export const HelpOutline = createIcon({
+  displayName: 'HelpOutline',
+  viewBox: '0 0 20 20',
+  path: (
+    <path
+      id='Icon_material-help-outline'
+      data-name='Icon material-help-outline'
+      d='M11,18h2V16H11ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8.011,8.011,0,0,1,12,20ZM12,6a4,4,0,0,0-4,4h2a2,2,0,0,1,4,0c0,2-3,1.75-3,5h2c0-2.25,3-2.5,3-5A4,4,0,0,0,12,6Z'
+      transform='translate(-2 -2)'
+      fill='currentColor'
+    />
+  )
+})
+
 export const Bell = createIcon({
   displayName: 'Bell',
   viewBox: '0 0 20 21.996',

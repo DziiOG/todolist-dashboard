@@ -44,7 +44,7 @@ const FilterSelectors = () => (
 )
 export const TaskFilter = () => (
   <Flex mb={{ ...rem(30) }} w='100%' justify='space-between' align='center'>
-    <SearchInput />
+    <SearchInput w={{ ...rem(300) }} h={{ ...rem(44) }} />
     <FilterSelectors />
   </Flex>
 )

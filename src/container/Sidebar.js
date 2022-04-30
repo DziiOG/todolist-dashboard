@@ -5,11 +5,12 @@ import { Box, Flex, Link, Stack } from '@chakra-ui/react'
 import SidebarItem from 'container/SidebarItem'
 import { Link as ReachRouter, useLocation } from 'react-router-dom'
 import { AnimateSharedLayout } from 'framer-motion'
-import { AiOutlineQuestionCircle } from 'react-icons/ai'
+// import { AiOutlineQuestionCircle } from 'react-icons/ai'
 import { RiLogoutBoxLine, RiDashboardLine } from 'react-icons/ri'
-import { FaCheckSquare } from 'react-icons/fa'
+// import { FaCheckSquare } from 'react-icons/fa'
 import { IoMdCalendar } from 'react-icons/io'
 import { FiSettings } from 'react-icons/fi'
+import { HelpOutline, MultipleOutline } from 'theme/custom-icons'
 
 const Sidebar = ({ page }) => {
   const { pathname } = useLocation()
@@ -18,7 +19,7 @@ const Sidebar = ({ page }) => {
     { id: 1, icon: RiDashboardLine, link: `/dashboard`, name: 'Dashboard' },
     {
       id: 2,
-      icon: FaCheckSquare,
+      icon: MultipleOutline,
       link: `/tasks`,
       name: 'Tasks'
     },
@@ -36,7 +37,7 @@ const Sidebar = ({ page }) => {
     },
     {
       id: 5,
-      icon: AiOutlineQuestionCircle,
+      icon: HelpOutline,
       link: `/support`,
       name: 'Support'
     }
