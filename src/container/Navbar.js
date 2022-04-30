@@ -11,7 +11,6 @@ import {
   InputLeftElement,
   Input
 } from '@chakra-ui/react'
-// import { VscBell } from 'react-icons/vsc'
 
 import { ChevronDown, Search } from 'theme/custom-icons'
 import { rem } from 'helpers/misc'
