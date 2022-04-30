@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, Grid } from '@chakra-ui/react'
 import PropTypes from 'prop-types'
+import Navbar from 'container/Navbar'
 import Sidebar from '../Sidebar'
 
 const Layout = ({ children, height, pt, px, className, ...rest }) => (
@@ -11,19 +12,19 @@ const Layout = ({ children, height, pt, px, className, ...rest }) => (
   >
     <Sidebar {...rest} />
     <Box
-      bg='green'
       as='main'
       fontFamily='body'
       fontSize={{ md: 'md' }}
       gridArea='main'
       w='100%'
       color='gray.800'
-      px={px ?? 20}
-      h={height}
+      h={height || '100vh'}
       className={className}
-      pt={pt ?? 28}
     >
-      {children}
+      <Navbar {...rest} />
+      <Box w='100%' h='100%' px={px ?? 20} pt={pt ?? 28}>
+        {children}
+      </Box>
     </Box>
   </Grid>
 )
