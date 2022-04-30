@@ -15,6 +15,39 @@ export const ChevronDown = createIcon({
   )
 })
 
+export const Bell = createIcon({
+  displayName: 'Bell',
+  viewBox: '"0 0 20 21.996',
+  path: (
+    <g
+      id='Icon_feather-bell'
+      data-name='Icon feather-bell'
+      transform='translate(-2 -1)'
+    >
+      <path
+        id='Path_9'
+        data-name='Path 9'
+        d='M18,8A6,6,0,1,0,6,8c0,7-3,9-3,9H21s-3-2-3-9'
+        fill='none'
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='2'
+      />
+      <path
+        id='Path_10'
+        data-name='Path 10'
+        d='M13.73,21a2,2,0,0,1-3.46,0'
+        fill='none'
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='2'
+      />
+    </g>
+  )
+})
+
 export const Search = createIcon({
   displayName: 'Search',
   viewBox: '0 0 15.785 15.789',

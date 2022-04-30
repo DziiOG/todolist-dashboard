@@ -11,8 +11,8 @@ import {
   InputLeftElement,
   Input
 } from '@chakra-ui/react'
-
-import { ChevronDown, Search } from 'theme/custom-icons'
+// import { BsBell } from 'react-icons/bs'
+import { Bell, ChevronDown, Search } from 'theme/custom-icons'
 import { rem } from 'helpers/misc'
 
 const Navbar = () => (
@@ -56,6 +56,9 @@ const Navbar = () => (
     </Flex>
     <HStack w='25%' spacing='1.5rem'>
       <Flex align='center' w='100%' justify='right'>
+        <Box mr={10}>
+          <Icon as={Bell} color='#29325a' boxSize={6} />
+        </Box>
         <Box mx={4} pos='relative'>
           <Avatar size='md' />
         </Box>
