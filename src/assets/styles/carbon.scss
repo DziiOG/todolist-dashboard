@@ -1,0 +1,87 @@
+/*************************
+          DROPDOWN STYLES
+**************************/
+
+.bx--list-box__menu-item:hover .bx--list-box__menu-item__option {
+    background-color: #3c9130;
+    color: white;
+    width: 100%;
+  }
+  
+  .bx--list-box__menu-item--active .bx--list-box__menu-item__option {
+    background-color: #3c9130;
+    color: white;
+  }
+  
+  .bx--list-box__field:focus {
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+  }
+  
+  .bx--list-box__menu-item__option {
+    margin: 0 0;
+    padding-left: 1rem;
+  }
+  
+  .bx--dropdown-item:hover {
+    background-color: #3c9130;
+    color: white;
+  }
+  
+  .bx--dropdown:focus {
+    border: 0px;
+  }
+  
+  .bx--list-box {
+    background-color: transparent;
+    height: 50px !important;
+  }
+  
+  .bx--dropdown {
+    background-color: transparent;
+  }
+  
+  .bx--dropdown--light {
+    background-color: transparent;
+  }
+  
+  .bx--dropdown:hover {
+    background-color: transparent;
+  }
+  
+  .bx--text-input:focus,
+  .bx--text-input:active {
+    outline: 2px solid transparent;
+  }
+  
+  .bx--list-box--expanded:hover {
+    background-color: transparent;
+  }
+  
+  .bx--list-box:hover {
+    background-color: transparent;
+  }
+  
+  .width-size {
+    width: 125px;
+  }
+  
+  
+  .activity svg {
+    fill: #fff;
+  }
+  
+  .bx--overflow-menu.bx--overflow-menu--open:hover {
+    background-color: transparent;
+  }
+  
+  .bx--overflow-menu:hover,
+  .bx--overflow-menu__trigger:hover {
+    background-color: transparent;
+  }
+  
+  .bx--overflow-menu:focus,
+  .bx--overflow-menu__trigger:focus {
+    outline: none;
+  }
+  
