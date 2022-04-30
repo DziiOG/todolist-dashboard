@@ -17,7 +17,7 @@ export const ChevronDown = createIcon({
 
 export const Bell = createIcon({
   displayName: 'Bell',
-  viewBox: '"0 0 20 21.996',
+  viewBox: '0 0 20 21.996',
   path: (
     <g
       id='Icon_feather-bell'

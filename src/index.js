@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react'
-import { createRoot } from 'react-dom/client'
+import ReactDOM from 'react-dom'
+
 import { ChakraProvider } from '@chakra-ui/react'
 import './assets/styles/index.css'
 import { theme } from 'theme/theme'
@@ -7,8 +8,11 @@ import App from 'container/App'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 // import Spinner from 'components/FetchCard/Spinner'
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 
 import reportWebVitals from './reportWebVitals'
+
+ChartJS.register(ArcElement, Tooltip, Legend)
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,10 +22,8 @@ const queryClient = new QueryClient({
     }
   }
 })
-const container = document.getElementById('root')
-const root = createRoot(container)
 
-root.render(
+ReactDOM.render(
   <ChakraProvider theme={theme}>
     <QueryClientProvider client={queryClient}>
       <Suspense>
@@ -29,7 +31,8 @@ root.render(
       </Suspense>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
-  </ChakraProvider>
+  </ChakraProvider>,
+  document.getElementById('root')
 )
 
 // If you want to start measuring performance in your app, pass a function
