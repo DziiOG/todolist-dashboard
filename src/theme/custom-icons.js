@@ -15,6 +15,137 @@ export const ChevronDown = createIcon({
   )
 })
 
+export const Priority = createIcon({
+  displayName: 'Priority',
+  viewBox: '0 0 4 18',
+  path: (
+    <g
+      id='Icon_material-priority-high'
+      data-name='Icon material-priority-high'
+      transform='translate(-10 -3)'
+    >
+      <path
+        id='Path_30'
+        data-name='Path 30'
+        d='M14,19a2,2,0,1,1-2-2A2,2,0,0,1,14,19Z'
+        fill='currentColor'
+      />
+      <path
+        id='Path_31'
+        data-name='Path 31'
+        d='M10,3h4V15H10Z'
+        fill='currentColor'
+      />
+    </g>
+  )
+})
+
+export const FeatherRepeat = createIcon({
+  displayName: 'FeatherRepeat',
+  viewBox: '0 0 20 24.828',
+  path: (
+    <g
+      id='Icon_feather-repeat'
+      data-name='Icon feather-repeat'
+      transform='translate(-2 0.414)'
+    >
+      <path
+        id='Path_34'
+        data-name='Path 34'
+        d='M17,1l4,4L17,9'
+        fill='none'
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='2'
+      />
+      <path
+        id='Path_35'
+        data-name='Path 35'
+        d='M3,11V9A4,4,0,0,1,7,5H21'
+        fill='none'
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='2'
+      />
+      <path
+        id='Path_36'
+        data-name='Path 36'
+        d='M7,23,3,19l4-4'
+        fill='none'
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='2'
+      />
+      <path
+        id='Path_37'
+        data-name='Path 37'
+        d='M21,13v2a4,4,0,0,1-4,4H3'
+        fill='none'
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='2'
+      />
+    </g>
+  )
+})
+
+export const CalendarFeather = createIcon({
+  displayName: 'CalendarFeather',
+  viewBox: '0 0 20 22',
+  path: (
+    <g
+      id='Icon_feather-calendar'
+      data-name='Icon feather-calendar'
+      transform='translate(-2 -1)'
+    >
+      <path
+        id='Path_26'
+        data-name='Path 26'
+        d='M5,4H19a2,2,0,0,1,2,2V20a2,2,0,0,1-2,2H5a2,2,0,0,1-2-2V6A2,2,0,0,1,5,4Z'
+        fill='none'
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='2'
+      />
+      <path
+        id='Path_27'
+        data-name='Path 27'
+        d='M16,2V6'
+        fill='none'
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='2'
+      />
+      <path
+        id='Path_28'
+        data-name='Path 28'
+        d='M8,2V6'
+        fill='none'
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='2'
+      />
+      <path
+        id='Path_29'
+        data-name='Path 29'
+        d='M3,10H21'
+        fill='none'
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='2'
+      />
+    </g>
+  )
+})
+
 export const MultipleOutline = createIcon({
   displayName: 'MultipleOutline',
   viewBox: '0 0 24 24',

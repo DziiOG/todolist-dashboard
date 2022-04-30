@@ -102,7 +102,12 @@ const ModalWrapper = ({
           {...buttonProps}
         />
       </Flex>
-      <ModalBody px={px} py={py} bg={bg} rounded={bodyRounded || '2xl'}>
+      <ModalBody
+        px={px || 0}
+        py={py || 0}
+        bg={bg}
+        rounded={bodyRounded || '2xl'}
+      >
         {children}
       </ModalBody>
     </ModalContent>
