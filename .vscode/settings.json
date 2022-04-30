@@ -1,0 +1,37 @@
+{
+    "editor.formatOnSave": true,
+    "[javascript]": {
+        "editor.formatOnSave": false
+    },
+    "eslint.alwaysShowStatus": true,
+    "files.autoSave": "off",
+    "javascript.validate.enable": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "cSpell.words": [
+        "advlist",
+        "aligncenter",
+        "alignjustify",
+        "alignleft",
+        "alignright",
+        "backcolor",
+        "bullist",
+        "chakra",
+        "charmap",
+        "datax",
+        "formatselect",
+        "Formik",
+        "Humaaans",
+        "insertdatetime",
+        "labelledby",
+        "numlist",
+        "outdent",
+        "removeformat",
+        "searchreplace",
+        "tinymce",
+        "visualblocks",
+        "Woohoo",
+        "wordcount"
+    ]
+}
