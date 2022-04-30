@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { ChakraProvider } from '@chakra-ui/react'
 import './assets/styles/index.css'
 import { theme } from 'theme/theme'
@@ -18,8 +18,10 @@ const queryClient = new QueryClient({
     }
   }
 })
+const container = document.getElementById('root')
+const root = createRoot(container)
 
-ReactDOM.render(
+root.render(
   <ChakraProvider theme={theme}>
     <QueryClientProvider client={queryClient}>
       <Suspense>
@@ -27,8 +29,7 @@ ReactDOM.render(
       </Suspense>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
-  </ChakraProvider>,
-  document.getElementById('root')
+  </ChakraProvider>
 )
 
 // If you want to start measuring performance in your app, pass a function
