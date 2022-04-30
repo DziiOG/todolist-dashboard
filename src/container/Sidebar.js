@@ -5,35 +5,38 @@ import { Box, Flex, Link, Stack } from '@chakra-ui/react'
 import SidebarItem from 'container/SidebarItem'
 import { Link as ReachRouter, useLocation } from 'react-router-dom'
 import { AnimateSharedLayout } from 'framer-motion'
-import { AiFillAccountBook } from 'react-icons/ai'
-import { RiLogoutBoxLine } from 'react-icons/ri'
+import { AiOutlineQuestionCircle } from 'react-icons/ai'
+import { RiLogoutBoxLine, RiDashboardLine } from 'react-icons/ri'
+import { FaCheckSquare } from 'react-icons/fa'
+import { IoMdCalendar } from 'react-icons/io'
+import { FiSettings } from 'react-icons/fi'
 
 const Sidebar = ({ page }) => {
   const { pathname } = useLocation()
 
   const menuLinks = [
-    { id: 1, icon: AiFillAccountBook, link: `/dashboard`, name: 'Dashboard' },
+    { id: 1, icon: RiDashboardLine, link: `/dashboard`, name: 'Dashboard' },
     {
       id: 2,
-      icon: AiFillAccountBook,
+      icon: FaCheckSquare,
       link: `/tasks`,
       name: 'Tasks'
     },
     {
       id: 3,
-      icon: AiFillAccountBook,
+      icon: IoMdCalendar,
       link: `/calender`,
       name: 'Calender'
     },
     {
       id: 4,
-      icon: AiFillAccountBook,
+      icon: FiSettings,
       link: `/settings`,
       name: 'Settings'
     },
     {
       id: 5,
-      icon: AiFillAccountBook,
+      icon: AiOutlineQuestionCircle,
       link: `/support`,
       name: 'Support'
     }

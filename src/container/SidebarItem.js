@@ -41,7 +41,7 @@ const SidebarItem = ({ icon, title, selected, step, id, page }) => (
         h={10}
         rounded='md'
       >
-        <Icon color='white' as={icon} boxSize={8} />
+        <Icon color='white' as={icon} boxSize={5} />
       </Flex>
     </Box>
 
