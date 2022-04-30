@@ -3,6 +3,7 @@ import {
   Flex,
   Heading,
   Icon,
+  Select,
   Tab,
   TabList,
   TabPanel,
@@ -13,9 +14,40 @@ import Button from 'components/Button'
 import { columns, data } from 'components/DashBoard/TasksList'
 import Table from 'components/Table'
 import Layout from 'container/Layout'
+import { SearchInput } from 'container/Navbar'
 import { rem } from 'helpers/misc'
 import React from 'react'
 import { BsPlus } from 'react-icons/bs'
+
+const FilterSelectors = () => (
+  <Flex align='center'>
+    <Select
+      color='#29325A'
+      fontFamily='Avenir'
+      fontStyle='normal'
+      fontWeight={900}
+      w={{ ...rem(142) }}
+      h={{ ...rem(44) }}
+      placeholder='Filter by'
+      mr={{ md: 5 }}
+    />
+    <Select
+      w={{ ...rem(142) }}
+      h={{ ...rem(44) }}
+      color='#29325A'
+      fontFamily='Avenir'
+      fontStyle='normal'
+      fontWeight={900}
+      placeholder='Sort by'
+    />
+  </Flex>
+)
+export const TaskFilter = () => (
+  <Flex mb={{ ...rem(30) }} w='100%' justify='space-between' align='center'>
+    <SearchInput />
+    <FilterSelectors />
+  </Flex>
+)
 
 const Tasks = () => (
   <Layout disableSearch page={2}>
@@ -43,7 +75,7 @@ const Tasks = () => (
             fontWeight={500}
             fontFamily='Avenir'
             color='#29325A'
-            mx={{ md: 10 }}
+            px={{ md: 10 }}
           >
             All
           </Tab>
@@ -61,7 +93,7 @@ const Tasks = () => (
             }}
             fontSize={{ md: 'xl' }}
             fontWeight={500}
-            mx={{ md: 10 }}
+            px={{ md: 10 }}
             fontFamily='Avenir'
             color='#29325A'
           >
@@ -69,7 +101,7 @@ const Tasks = () => (
           </Tab>
           <Tab
             _focus={{ outline: 'none' }}
-            mx={{ md: 10 }}
+            px={{ md: 10 }}
             _selected={{
               fontSize: 'xl',
               fontFamily: 'Avenir',
@@ -89,7 +121,7 @@ const Tasks = () => (
           </Tab>
           <Tab
             _focus={{ outline: 'none' }}
-            mx={{ md: 10 }}
+            px={{ md: 10 }}
             _selected={{
               fontSize: 'xl',
               fontFamily: 'Avenir',
@@ -106,7 +138,7 @@ const Tasks = () => (
           >
             Past tasks
           </Tab>
-          <Flex justify='right' w='50%'>
+          <Flex align='center' justify='right' w='59.5%'>
             <Button
               mb={{ md: 3 }}
               h={{ ...rem(44) }}
@@ -120,21 +152,25 @@ const Tasks = () => (
         <TabPanels>
           <TabPanel>
             <Box w='100%' h='100%' overflowY='scroll' position='relative'>
+              <TaskFilter />
               <Table columns={columns} data={data} />
             </Box>
           </TabPanel>
           <TabPanel>
             <Box w='100%' h='100%' overflowY='scroll' position='relative'>
+              <TaskFilter />
               <Table columns={columns} data={data} />
             </Box>
           </TabPanel>
           <TabPanel>
             <Box w='100%' h='100%' overflowY='scroll' position='relative'>
+              <TaskFilter />
               <Table columns={columns} data={data} />
             </Box>
           </TabPanel>
           <TabPanel>
             <Box w='100%' h='100%' overflowY='scroll' position='relative'>
+              <TaskFilter />
               <Table columns={columns} data={data} />
             </Box>
           </TabPanel>

@@ -94,6 +94,54 @@ export const data = [
     createdAt: new Date().toDateString(),
     dueDate: new Date().toDateString(),
     status: 'IN_PROGRESS'
+  },
+  {
+    name: 'Call gardener',
+    description: 'Ask Jonas to mow lawn today',
+    category: 'House-keeping',
+    createdAt: new Date().toDateString(),
+    dueDate: new Date().toDateString(),
+    status: 'IN_PROGRESS'
+  },
+  {
+    name: 'Call gardener',
+    description: 'Ask Jonas to mow lawn today',
+    category: 'House-keeping',
+    createdAt: new Date().toDateString(),
+    dueDate: new Date().toDateString(),
+    status: 'IN_PROGRESS'
+  },
+  {
+    name: 'Call gardener',
+    description: 'Ask Jonas to mow lawn today',
+    category: 'House-keeping',
+    createdAt: new Date().toDateString(),
+    dueDate: new Date().toDateString(),
+    status: 'IN_PROGRESS'
+  },
+  {
+    name: 'Call gardener',
+    description: 'Ask Jonas to mow lawn today',
+    category: 'House-keeping',
+    createdAt: new Date().toDateString(),
+    dueDate: new Date().toDateString(),
+    status: 'IN_PROGRESS'
+  },
+  {
+    name: 'Call gardener',
+    description: 'Ask Jonas to mow lawn today',
+    category: 'House-keeping',
+    createdAt: new Date().toDateString(),
+    dueDate: new Date().toDateString(),
+    status: 'IN_PROGRESS'
+  },
+  {
+    name: 'Call gardener',
+    description: 'Ask Jonas to mow lawn today',
+    category: 'House-keeping',
+    createdAt: new Date().toDateString(),
+    dueDate: new Date().toDateString(),
+    status: 'IN_PROGRESS'
   }
 ]
 function TasksList() {

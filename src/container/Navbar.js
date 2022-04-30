@@ -16,12 +16,37 @@ import {
 import { Bell, ChevronDown, Search } from 'theme/custom-icons'
 import { rem } from 'helpers/misc'
 
+export const SearchInput = () => (
+  <InputGroup
+    border='transparent'
+    outline='none'
+    _focus={{ border: 'none', outline: 'none' }}
+    _hover={{ outline: 'none' }}
+    borderRadius={{ ...rem(10) }}
+    bg='#F2F5FF 0% 0% no-repeat padding-box;'
+    w={{ ...rem(497) }}
+  >
+    <InputLeftElement pointerEvents='none'>
+      <Icon as={Search} color='#29325A66' />
+    </InputLeftElement>
+    <Input
+      fontSize='sm'
+      _placeholder={{
+        fontSize: 'sm',
+        color: '#29325A66'
+      }}
+      type='tel'
+      placeholder='Search Anything'
+    />
+  </InputGroup>
+)
 const Navbar = ({ disableSearch }) => (
   <Flex
     w='86%'
     as='nav'
     gridArea='header'
     align='center'
+    bg='white'
     justify='space-between'
     h={{ md: 16 }}
     pos='fixed'
@@ -32,28 +57,7 @@ const Navbar = ({ disableSearch }) => (
     <Flex justify='right' w='75%'>
       {!disableSearch && (
         <Stack spacing={4}>
-          <InputGroup
-            border='transparent'
-            outline='none'
-            _focus={{ border: 'none', outline: 'none' }}
-            _hover={{ outline: 'none' }}
-            borderRadius={{ ...rem(10) }}
-            bg='#F2F5FF 0% 0% no-repeat padding-box;'
-            w={{ ...rem(497) }}
-          >
-            <InputLeftElement pointerEvents='none'>
-              <Icon as={Search} color='#29325A66' />
-            </InputLeftElement>
-            <Input
-              fontSize='sm'
-              _placeholder={{
-                fontSize: 'sm',
-                color: '#29325A66'
-              }}
-              type='tel'
-              placeholder='Search Anything'
-            />
-          </InputGroup>
+          <SearchInput />
         </Stack>
       )}
     </Flex>
