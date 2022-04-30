@@ -143,7 +143,7 @@ const TaskModal = () => {
                 label='Priority'
                 hasSpan
                 spanInfo='(Optional)'
-                placeholder='Select task frequency'
+                placeholder='Select priority'
                 id='priority'
                 name='priority'
                 options={[]}
@@ -162,7 +162,7 @@ const TaskModal = () => {
                 required
                 leftIcon={FeatherRepeat}
                 label='Status'
-                placeholder='Select task frequency'
+                placeholder='Select task status'
                 id='status'
                 name='status'
                 options={[]}
@@ -180,7 +180,7 @@ const TaskModal = () => {
         </GridItem>
       </Grid>
 
-      <CustomButton w='100%' />
+      <CustomButton type='submit' w='100%' title='Add task' />
     </ModalWrapper>
   )
 }
