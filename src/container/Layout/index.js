@@ -19,10 +19,19 @@ const Layout = ({ children, height, pt, px, className, ...rest }) => (
       w='100%'
       color='gray.800'
       h={height || '100vh'}
+      bg='white'
       className={className}
     >
       <Navbar {...rest} />
-      <Box w='100%' h='100%' px={px ?? 20} pt={pt ?? 28}>
+      <Box
+        w='100%'
+        h='100%'
+        overflowY='scroll'
+        bg='white'
+        px={px ?? 20}
+        pt={pt ?? 28}
+        pb={{ md: 10 }}
+      >
         {children}
       </Box>
     </Box>

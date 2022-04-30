@@ -67,9 +67,9 @@ export const theme = extendTheme({
       600: '#3c9130'
     },
     primaryButton: {
-      200: '#1f7a73',
-      500: '#004C46',
-      600: '#004C46'
+      200: '#677ACB',
+      500: '#677ACB',
+      600: '#677ACB'
     },
     dangerButton: {
       500: '#E53E3E',
