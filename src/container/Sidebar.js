@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box, Link, Stack } from '@chakra-ui/react'
+import { Box, Flex, Link, Stack } from '@chakra-ui/react'
 
 import SidebarItem from 'container/SidebarItem'
 import { Link as ReachRouter, useLocation } from 'react-router-dom'
 import { AnimateSharedLayout } from 'framer-motion'
 import { AiFillAccountBook } from 'react-icons/ai'
+import { RiLogoutBoxLine } from 'react-icons/ri'
 
 const Sidebar = ({ page }) => {
   const { pathname } = useLocation()
@@ -53,26 +54,31 @@ const Sidebar = ({ page }) => {
       zIndex={20}
     >
       <AnimateSharedLayout>
-        <Stack spacing='2rem' mt={28}>
-          {menuLinks.map((item, index) => (
-            <Box key={(i => i)(index)}>
-              <Link
-                as={ReachRouter}
-                to={item.link}
-                _hover={{ textDecor: 'none' }}
-                cursor='pointer'
-                _focus={{ boxShadow: 'none' }}
-              >
-                <SidebarItem
-                  icon={item.icon}
-                  title={item.name}
-                  selected={pathname === item.link}
-                  id={item.id}
-                  page={page}
-                />
-              </Link>
+        <Stack h='83vh' spacing='2rem' mt={36}>
+          <Flex h='100%' w='100%' justify='space-between' direction='column'>
+            <Box>
+              {menuLinks.map((item, index) => (
+                <Box key={(i => i)(index)}>
+                  <Link
+                    as={ReachRouter}
+                    to={item.link}
+                    _hover={{ textDecor: 'none' }}
+                    cursor='pointer'
+                    _focus={{ boxShadow: 'none' }}
+                  >
+                    <SidebarItem
+                      icon={item.icon}
+                      title={item.name}
+                      selected={pathname === item.link}
+                      id={item.id}
+                      page={page}
+                    />
+                  </Link>
+                </Box>
+              ))}
             </Box>
-          ))}
+            <SidebarItem icon={RiLogoutBoxLine} page={6} title={'Logout'} />
+          </Flex>
         </Stack>
       </AnimateSharedLayout>
     </Box>

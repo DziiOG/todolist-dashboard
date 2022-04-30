@@ -8,12 +8,13 @@ const MotionFlex = motion(Flex)
 
 const SidebarItem = ({ icon, title, selected, step, id, page }) => (
   <MotionFlex
-    spacing='0.2rem'
-    bg='#29325A66 0% 0% no-repeat padding-box'
+    my={{ md: 4 }}
+    pacing='0.2rem'
     borderRadius={{ ...rem(10) }}
     px={{ md: 4 }}
     rounded='lg'
-    h={{ ...rem(53) }}
+    bg={selected || page === id ? '#29325A66' : 'transparent'}
+    h={{ ...rem(48) }}
     role='group'
     alignItems='center'
     {...(selected || page === id
@@ -28,7 +29,7 @@ const SidebarItem = ({ icon, title, selected, step, id, page }) => (
       <Flex
         align='center'
         justify='center'
-        bg={selected || page === id ? 'primary' : 'cf.300'}
+        bg={'transparent'}
         color={
           selected || page === id
             ? 'white'
@@ -40,34 +41,37 @@ const SidebarItem = ({ icon, title, selected, step, id, page }) => (
         h={10}
         rounded='md'
       >
-        <Icon as={icon} boxSize={8} />
+        <Icon color='white' as={icon} boxSize={8} />
       </Flex>
-
-      {selected || page === id ? (
-        <MotionFlex
-          align='center'
-          justify='center'
-          pos='absolute'
-          inset={-1}
-          w={12}
-          h={12}
-          rounded='lg'
-          className='selected'
-          layoutId='selected'
-        />
-      ) : null}
     </Box>
 
     <Text
       mt={1}
       ml={{ ...rem(8) }}
       fontFamily='Avenir'
-      color={selected || page === id ? '#F2F5FF' : 'todo.300'}
+      color={selected || page === id ? 'white' : 'white'}
       fontSize={{ ...rem(14) }}
-      fontWeight={selected || page === id ? 700 : 500}
+      fontWeight={selected || page === id ? 900 : 400}
     >
       {title}
     </Text>
+    {selected || page === id ? (
+      <MotionFlex
+        border='none'
+        mt={1}
+        ml={1}
+        bg='transparent'
+        align='center'
+        justify='center'
+        pos='absolute'
+        inset={-1}
+        w={'100%'}
+        h={{ ...rem(53) }}
+        borderRadius={{ ...rem(10) }}
+        className='selected'
+        layoutId='selected'
+      />
+    ) : null}
   </MotionFlex>
 )
 
