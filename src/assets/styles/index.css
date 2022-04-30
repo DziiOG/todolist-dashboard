@@ -1,49 +1,49 @@
 @font-face {
-    font-family: "CeraPro";
+    font-family: "Avenir";
     font-weight: 200;
     font-style: normal;
     font-display: swap;
-    src: url("../fonts/CeraPRO-Thin.ttf") format("truetype");
+    src: url("../fonts/AvenirLTStd-Light.otf") format("opentype");
   }
   
   @font-face {
-    font-family: "CeraPro";
+    font-family: "Avenir";
     font-weight: 300;
     font-style: normal;
     font-display: swap;
-    src: url("../fonts/CeraPRO-Light.ttf") format("truetype");
+    src: url("../fonts/AvenirLTStd-Book.otf") format("opentype");
   }
   
   @font-face {
-    font-family: "CeraPro";
+    font-family: "Avenir";
     font-weight: 400;
     font-style: normal;
     font-display: swap;
-    src: url("../fonts/CeraPRO-Regular.ttf") format("truetype");
+    src: url("../fonts/AvenirLTStd-Roman.otf") format("opentype");
   }
   
   @font-face {
-    font-family: "CeraPro";
+    font-family: "Avenir";
     font-weight: 500;
     font-style: normal;
     font-display: swap;
-    src: url("../fonts/CeraPRO-Medium.ttf") format("truetype");
+    src: url("../fonts/Avenir-Medium.ttf") format("truetype");
   }
   
   @font-face {
-    font-family: "CeraPro";
+    font-family: "Avenir";
     font-weight: 700;
     font-style: normal;
     font-display: swap;
-    src: url("../fonts/CeraPRO-Bold.ttf") format("truetype");
+    src: url("../fonts/Avenir-Heavy.ttf") format("truetype");
   }
   
   @font-face {
-    font-family: "CeraPro";
+    font-family: "Avenir";
     font-weight: 900;
     font-style: normal;
     font-display: swap;
-    src: url("../fonts/CeraPRO-Black.ttf") format("truetype");
+    src: url("../fonts/Avenir-Black.ttf") format("truetype");
   }
   
   .active-link.active {

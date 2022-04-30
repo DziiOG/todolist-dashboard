@@ -17,7 +17,7 @@ export const theme = extendTheme({
     global: () => ({
       body: {
         fontSize: 'md',
-        fontFamily: '"CeraPro", sans-serif',
+        fontFamily: '"Avenir", sans-serif',
         lineHeight: 'tall',
         bg: 'gray.50'
       }
@@ -25,8 +25,8 @@ export const theme = extendTheme({
   },
   breakpoints,
   fonts: {
-    heading: '"CeraPro" ,sans-serif',
-    body: '"CeraPro", sans-serif'
+    heading: '"Avenir" ,sans-serif',
+    body: '"Avenir", sans-serif'
   },
   fontSizes: {
     xx: '.55rem',
