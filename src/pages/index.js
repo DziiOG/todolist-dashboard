@@ -7,6 +7,7 @@ const Login = React.lazy(() => import('./login'))
 const Signup = React.lazy(() => import('./signup'))
 const Tasks = React.lazy(() => import('./tasks'))
 const Support = React.lazy(() => import('./support'))
+const Calender = React.lazy(() => import('./calender'))
 
 const Pages = {
   Dashboard,
@@ -15,7 +16,8 @@ const Pages = {
   Login,
   Signup,
   Tasks,
-  Support
+  Support,
+  Calender
 }
 
 export default Pages
