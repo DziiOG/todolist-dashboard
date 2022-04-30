@@ -1,11 +1,12 @@
 import React from 'react'
-import { Box, Checkbox, Flex, Icon, Text } from '@chakra-ui/react'
+import { Box, Checkbox, Flex, Icon, Tag, Text } from '@chakra-ui/react'
 import { rem } from 'helpers/misc'
 import { FiChevronRight } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
 import Table from 'components/Table'
 import { AiOutlineCheck } from 'react-icons/ai'
 import TableAction from 'components/Table/TableAction'
+import moment from 'moment'
 
 export const columns = [
   {
@@ -26,16 +27,25 @@ export const columns = [
     selector: 'description'
   },
   {
-    name: 'Date created',
-    selector: 'createdAt'
+    name: 'Category',
+    selector: row => (
+      <Tag
+        color='#29325A'
+        borderRadius={{ ...rem(10) }}
+        p={3}
+        bg={row.category.color}
+      >
+        {row.category.name}
+      </Tag>
+    )
   },
   {
-    name: 'Category',
-    selector: 'category'
+    name: 'Date created',
+    selector: row => <Text>{moment(row?.createdAt).format('DD/MM/YYYY')}</Text>
   },
   {
     name: 'Due date',
-    selector: 'dueDate'
+    selector: row => <Text>{moment(row?.dueDate).format('DD/MM/YYYY')}</Text>
   },
   {
     name: 'Status',
@@ -66,79 +76,7 @@ export const data = [
   {
     name: 'Call gardener',
     description: 'Ask Jonas to mow lawn today',
-    category: 'House-keeping',
-    createdAt: new Date().toDateString(),
-    dueDate: new Date().toDateString(),
-    status: 'IN_PROGRESS'
-  },
-  {
-    name: 'Call gardener',
-    description: 'Ask Jonas to mow lawn today',
-    category: 'House-keeping',
-    createdAt: new Date().toDateString(),
-    dueDate: new Date().toDateString(),
-    status: 'IN_PROGRESS'
-  },
-  {
-    name: 'Call gardener',
-    description: 'Ask Jonas to mow lawn today',
-    category: 'House-keeping',
-    createdAt: new Date().toDateString(),
-    dueDate: new Date().toDateString(),
-    status: 'IN_PROGRESS'
-  },
-  {
-    name: 'Call gardener',
-    description: 'Ask Jonas to mow lawn today',
-    category: 'House-keeping',
-    createdAt: new Date().toDateString(),
-    dueDate: new Date().toDateString(),
-    status: 'IN_PROGRESS'
-  },
-  {
-    name: 'Call gardener',
-    description: 'Ask Jonas to mow lawn today',
-    category: 'House-keeping',
-    createdAt: new Date().toDateString(),
-    dueDate: new Date().toDateString(),
-    status: 'IN_PROGRESS'
-  },
-  {
-    name: 'Call gardener',
-    description: 'Ask Jonas to mow lawn today',
-    category: 'House-keeping',
-    createdAt: new Date().toDateString(),
-    dueDate: new Date().toDateString(),
-    status: 'IN_PROGRESS'
-  },
-  {
-    name: 'Call gardener',
-    description: 'Ask Jonas to mow lawn today',
-    category: 'House-keeping',
-    createdAt: new Date().toDateString(),
-    dueDate: new Date().toDateString(),
-    status: 'IN_PROGRESS'
-  },
-  {
-    name: 'Call gardener',
-    description: 'Ask Jonas to mow lawn today',
-    category: 'House-keeping',
-    createdAt: new Date().toDateString(),
-    dueDate: new Date().toDateString(),
-    status: 'IN_PROGRESS'
-  },
-  {
-    name: 'Call gardener',
-    description: 'Ask Jonas to mow lawn today',
-    category: 'House-keeping',
-    createdAt: new Date().toDateString(),
-    dueDate: new Date().toDateString(),
-    status: 'IN_PROGRESS'
-  },
-  {
-    name: 'Call gardener',
-    description: 'Ask Jonas to mow lawn today',
-    category: 'House-keeping',
+    category: { color: '#ff00ff', name: 'House-keeping' },
     createdAt: new Date().toDateString(),
     dueDate: new Date().toDateString(),
     status: 'IN_PROGRESS'
