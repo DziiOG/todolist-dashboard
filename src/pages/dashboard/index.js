@@ -1,6 +1,7 @@
+import Layout from 'container/Layout'
 import React from 'react'
 
-const DashBoard = () => <div>DashBoard</div>
+const DashBoard = () => <Layout page={1} />
 
 DashBoard.propTypes = {}
 

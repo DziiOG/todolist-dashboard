@@ -1,11 +1,11 @@
 import React from 'react'
 import { createBrowserHistory } from 'history'
-import { ComponentsProvider } from 'context/component'
+import { ComponentContextProvider } from 'context/useComponent'
 import { ApiContextProvider } from 'context/useApi'
 import useAuth, { AuthContextProvider } from 'context/useAuth'
 import Spinner from 'components/FetchCard/Spinner'
+import { ModalContextProvider } from 'context/useModal'
 import Router from '../routes/Router'
-import { ModalProvider } from '../context/modal'
 import CustomRouter from '../routes/CustomRouter'
 
 const RouterContainer = () => {
@@ -33,15 +33,15 @@ function App() {
 
   return (
     <CustomRouter history={history}>
-      <ComponentsProvider>
+      <ComponentContextProvider>
         <ApiContextProvider>
           <AuthContextProvider>
-            <ModalProvider>
+            <ModalContextProvider>
               <RouterContainer />
-            </ModalProvider>
+            </ModalContextProvider>
           </AuthContextProvider>
         </ApiContextProvider>
-      </ComponentsProvider>
+      </ComponentContextProvider>
     </CustomRouter>
   )
 }
