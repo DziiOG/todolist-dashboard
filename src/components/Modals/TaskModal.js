@@ -4,7 +4,7 @@ import useComponent from 'context/useComponent'
 import { useFormik } from 'formik'
 import { TaskSchema } from 'helpers/validation'
 import { Grid, GridItem } from '@chakra-ui/react'
-import { FormInput, FormSelect } from 'components/Form'
+import { FormInput, FormSelect, FormTextarea } from 'components/Form'
 import { CalendarFeather, FeatherRepeat } from 'theme/custom-icons'
 import { rem } from 'helpers/misc'
 import ModalWrapper from './ModalWrapper'
@@ -18,7 +18,8 @@ const TaskModal = () => {
       name: '',
       dueDate: '',
       priority: '',
-      frequency: ''
+      frequency: '',
+      description: ''
     },
     enableReinitialize: true,
     validationSchema: TaskSchema,
@@ -43,7 +44,7 @@ const TaskModal = () => {
       isOpen={isOpen}
       onClose={onClose}
     >
-      <Grid w='100%' gap={5} templateColumns='repeat(2, 1fr)'>
+      <Grid mb={{ md: 5 }} w='100%' gap={5} templateColumns='repeat(2, 1fr)'>
         <GridItem>
           <FormInput
             label='Title'
@@ -62,8 +63,8 @@ const TaskModal = () => {
         </GridItem>
         <GridItem>
           <FormInput
-            required
             type='datetime-local'
+            required
             id='dueDate'
             name='dueDate'
             label='Schedule'
@@ -98,9 +99,8 @@ const TaskModal = () => {
         </GridItem>
         <GridItem>
           <FormSelect
+            required
             leftIcon={FeatherRepeat}
-            hasSpan
-            spanInfo={'(Optional)'}
             label='Frequency'
             placeholder='Select task frequency'
             id='frequency'
@@ -117,6 +117,69 @@ const TaskModal = () => {
           />
         </GridItem>
       </Grid>
+      <Grid w='100%' gap={5} mb={{ md: 5 }} templateColumns='repeat(2, 1fr)'>
+        <GridItem>
+          <FormTextarea
+            label='Description'
+            placeholder='Add description'
+            h='100%'
+            required
+            id='description'
+            name='description'
+            value={values.description}
+            error={errors.description}
+            touched={touched.description}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            setFieldTouched={setFieldTouched}
+          />
+        </GridItem>
+        <GridItem>
+          <Grid gap={5} w='100%' templateColumns='repeat(1,1fr)'>
+            <GridItem>
+              <FormSelect
+                required
+                leftIcon={FeatherRepeat}
+                label='Priority'
+                hasSpan
+                spanInfo='(Optional)'
+                placeholder='Select task frequency'
+                id='priority'
+                name='priority'
+                options={[]}
+                h={{ ...rem(45) }}
+                value={values.priority}
+                error={errors.priority}
+                touched={touched.priority}
+                setFieldValue={(id, e) => {
+                  setFieldValue(id, e)
+                }}
+                setFieldTouched={setFieldTouched}
+              />
+            </GridItem>
+            <GridItem>
+              <FormSelect
+                required
+                leftIcon={FeatherRepeat}
+                label='Status'
+                placeholder='Select task frequency'
+                id='status'
+                name='status'
+                options={[]}
+                h={{ ...rem(45) }}
+                value={values.status}
+                error={errors.status}
+                touched={touched.status}
+                setFieldValue={(id, e) => {
+                  setFieldValue(id, e)
+                }}
+                setFieldTouched={setFieldTouched}
+              />
+            </GridItem>
+          </Grid>
+        </GridItem>
+      </Grid>
+
       <CustomButton w='100%' />
     </ModalWrapper>
   )
