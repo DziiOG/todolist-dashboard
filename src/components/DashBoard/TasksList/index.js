@@ -11,7 +11,11 @@ function TasksList() {
   const columns = [
     {
       name: 'Task name',
-      selector: 'name'
+      selector: row => (
+        <Flex>
+          <Text>{row?.name}</Text>
+        </Flex>
+      )
     },
     {
       name: 'Description',
