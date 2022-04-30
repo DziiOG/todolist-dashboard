@@ -1,0 +1,97 @@
+{
+    "plugins": [
+      "react",
+      "prettier"
+    ],
+    "rules": {
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      ],
+      "import/no-extraneous-dependencies": "off",
+      "space-before-function-paren": "off",
+      "react/no-unescaped-entities": [
+        "error",
+        {
+          "forbid": [
+            ">",
+            "}"
+          ]
+        }
+      ],
+      "react/jsx-indent": [
+        "error",
+        2
+      ],
+      "key-spacing": [
+        "error",
+        {
+          "afterColon": true
+        }
+      ],
+      "array-bracket-spacing": [
+        "error",
+        "never"
+      ],
+      "no-extra-semi": "off",
+      "react/display-name": "off",
+      "react/jsx-first-prop-new-line": "off",
+      "react/jsx-closing-bracket-location": "off",
+      "prefer-destructuring": "off",
+      "import/no-unresolved": "off",
+      "no-nested-ternary": "off",
+      "no-unused-expressions": "off",
+      "no-plusplus": "off",
+      "react/jsx-no-bind": "off",
+      "no-param-reassign": "off",
+      "no-shadow": "off",
+      "react/jsx-key": [
+        "error",
+        {
+          "checkFragmentShorthand": true
+        }
+      ],
+      "jsx-a11y/click-events-have-key-events": "off",
+      "jsx-a11y/no-static-element-interactions": "off",
+      "no-return-await": "off",
+      "no-unused-vars": "error",
+      "react/state-in-constructor": "off",
+      "react/jsx-no-useless-fragment": "off",
+      "react/jsx-curly-brace-presence": "off",
+      "no-unsafe-optional-chaining": "off",
+      "react/no-unstable-nested-components": "off",
+      "react/jsx-no-constructed-context-values": "off",
+      "prettier/prettier": [
+        "error",
+        {
+          "trailingComma": "none",
+          "singleQuote": true,
+          "jsxSingleQuote": true,
+          "tabWidth": 2,
+          "printWidth": 80,
+          "semi": false,
+          "arrowParens": "avoid",
+          "endOfLine": "auto"
+        }
+      ]
+    },
+    "settings": {
+      "react": {
+        "pragma": "React",
+        "version": "detect"
+      }
+    },
+    "parser": "@babel/eslint-parser",
+    "extends": [
+      "prettier",
+      "google",
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "wesbos"
+    ]
+  }
