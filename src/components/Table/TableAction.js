@@ -8,9 +8,9 @@ import {
   MenuList
 } from '@chakra-ui/react'
 import { Link as ReactRouter } from 'react-router-dom'
-import { IoEllipsisHorizontal } from 'react-icons/io5'
 import PropTypes from 'prop-types'
 import useComponents from 'context/useComponent'
+import { BiDotsVerticalRounded } from 'react-icons/bi'
 
 const TableAction = ({ options, state, data, id }) => {
   const { toggleModal } = useComponents()
@@ -28,7 +28,7 @@ const TableAction = ({ options, state, data, id }) => {
             alignItems='center'
             justifyContent='center'
           >
-            <Icon as={IoEllipsisHorizontal} color='text' d='inline-flex' />
+            <Icon as={BiDotsVerticalRounded} color='text' d='inline-flex' />
           </MenuButton>
           <MenuList w={{ md: 20 }}>
             {options?.map((item, index) =>
@@ -42,7 +42,7 @@ const TableAction = ({ options, state, data, id }) => {
                 >
                   <MenuItem
                     key={item.id}
-                    _hover={{ bg: 'cf.900', color: 'white' }}
+                    _hover={{ bg: '#F2F5FF66', color: '#333333' }}
                     py={2}
                   >
                     {item.name}
@@ -52,7 +52,7 @@ const TableAction = ({ options, state, data, id }) => {
                 <MenuItem
                   ref={item?.ref}
                   key={item.id}
-                  _hover={{ bg: 'cf.900', color: 'white' }}
+                  _hover={{ bg: '#F2F5FF66', color: '#333333' }}
                   py={2}
                   onClick={
                     item?.onClick ||

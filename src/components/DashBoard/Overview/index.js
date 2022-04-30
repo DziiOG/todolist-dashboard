@@ -12,12 +12,12 @@ const Overview = () => {
     {
       total: 14,
       title: 'Completed',
-      id: 1
+      id: 2
     },
     {
       total: 7,
       title: 'In progress',
-      id: 1
+      id: 3
     }
   ]
   return (

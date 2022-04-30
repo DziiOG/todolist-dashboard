@@ -1,73 +1,104 @@
 import React from 'react'
-import { Box, Flex, Icon, Text } from '@chakra-ui/react'
+import { Box, Checkbox, Flex, Icon, Text } from '@chakra-ui/react'
 import { rem } from 'helpers/misc'
 import { FiChevronRight } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
 import Table from 'components/Table'
+import { AiOutlineCheck } from 'react-icons/ai'
+import TableAction from 'components/Table/TableAction'
 
+export const columns = [
+  {
+    name: 'Task name',
+    selector: row => (
+      <Flex>
+        <Checkbox
+          icon={<Icon color='black' as={AiOutlineCheck} />}
+          colorScheme='green'
+        >
+          <Text ml={2}>{row?.name}</Text>
+        </Checkbox>
+      </Flex>
+    )
+  },
+  {
+    name: 'Description',
+    selector: 'description'
+  },
+  {
+    name: 'Date created',
+    selector: 'createdAt'
+  },
+  {
+    name: 'Category',
+    selector: 'category'
+  },
+  {
+    name: 'Due date',
+    selector: 'dueDate'
+  },
+  {
+    name: 'Status',
+    selector: 'status'
+  },
+  {
+    overflow: false,
+    selector: row => (
+      <TableAction
+        options={[
+          {
+            id: 1,
+            name: 'Edit',
+            path: `/tasks/${row?._id}`,
+            state: row
+          },
+          {
+            id: 2,
+            name: 'Delete',
+            state: 'action'
+          }
+        ]}
+      />
+    )
+  }
+]
+export const data = [
+  {
+    name: 'Call gardener',
+    description: 'Ask Jonas to mow lawn today',
+    category: 'House-keeping',
+    createdAt: new Date().toDateString(),
+    dueDate: new Date().toDateString(),
+    status: 'IN_PROGRESS'
+  },
+  {
+    name: 'Call gardener',
+    description: 'Ask Jonas to mow lawn today',
+    category: 'House-keeping',
+    createdAt: new Date().toDateString(),
+    dueDate: new Date().toDateString(),
+    status: 'IN_PROGRESS'
+  },
+  {
+    name: 'Call gardener',
+    description: 'Ask Jonas to mow lawn today',
+    category: 'House-keeping',
+    createdAt: new Date().toDateString(),
+    dueDate: new Date().toDateString(),
+    status: 'IN_PROGRESS'
+  },
+  {
+    name: 'Call gardener',
+    description: 'Ask Jonas to mow lawn today',
+    category: 'House-keeping',
+    createdAt: new Date().toDateString(),
+    dueDate: new Date().toDateString(),
+    status: 'IN_PROGRESS'
+  }
+]
 function TasksList() {
   const navigate = useNavigate()
 
-  const columns = [
-    {
-      name: 'Task name',
-      selector: row => (
-        <Flex>
-          <Text>{row?.name}</Text>
-        </Flex>
-      )
-    },
-    {
-      name: 'Description',
-      selector: 'description'
-    },
-    {
-      name: 'Category',
-      selector: 'category'
-    },
-    {
-      name: 'Due date',
-      selector: 'dueDate'
-    },
-    {
-      name: 'Status',
-      selector: 'status'
-    }
-  ]
-  const data = [
-    {
-      name: 'Call gardener',
-      description: 'Ask Jonas to mow lawn today',
-      category: 'House-keeping',
-      createdAt: new Date().toDateString(),
-      dueDate: new Date().toDateString(),
-      status: 'IN_PROGRESS'
-    },
-    {
-      name: 'Call gardener',
-      description: 'Ask Jonas to mow lawn today',
-      category: 'House-keeping',
-      createdAt: new Date().toDateString(),
-      dueDate: new Date().toDateString(),
-      status: 'IN_PROGRESS'
-    },
-    {
-      name: 'Call gardener',
-      description: 'Ask Jonas to mow lawn today',
-      category: 'House-keeping',
-      createdAt: new Date().toDateString(),
-      dueDate: new Date().toDateString(),
-      status: 'IN_PROGRESS'
-    },
-    {
-      name: 'Call gardener',
-      description: 'Ask Jonas to mow lawn today',
-      category: 'House-keeping',
-      createdAt: new Date().toDateString(),
-      dueDate: new Date().toDateString(),
-      status: 'IN_PROGRESS'
-    }
-  ]
   return (
     <Box mt={{ ...rem(40) }}>
       <Flex w='100%' align='center' justify='space-between'>

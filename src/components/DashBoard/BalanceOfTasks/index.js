@@ -44,6 +44,7 @@ const BalanceOfTasks = () => {
             </Text>
             <DoughnutChart
               data={tasks.map(task => ({
+                id: task.id,
                 name: task.category,
                 color: task.color,
                 value: task.total
