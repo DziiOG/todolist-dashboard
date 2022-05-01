@@ -12,7 +12,6 @@ const CalendarDateItem = ({ dateItem, currentDay }) => (
     border={currentDay && '3px solid #0066CC'}
     borderWidth={'1px'}
     borderColor='gray.100'
-    p={{ ...rem(8) }}
   >
     <Flex
       w='100%'
@@ -20,7 +19,14 @@ const CalendarDateItem = ({ dateItem, currentDay }) => (
       h='100%'
       justify={dateItem?.events?.length < 3 ? 'flex-start' : 'space-between'}
     >
-      <Flex h='20%' align='center' justify='space-between' w='100%' as='header'>
+      <Flex
+        m={{ ...rem(8) }}
+        h='20%'
+        align='center'
+        justify='space-between'
+        w='100%'
+        as='header'
+      >
         <Text
           fontWeight={400}
           fontSize={'lg'}
@@ -31,7 +37,7 @@ const CalendarDateItem = ({ dateItem, currentDay }) => (
         </Text>
       </Flex>
       {dateItem?.dayNumber && dateItem?.events?.length > 0 ? (
-        <Grid h='80%' overflowY={'scroll'} w='100%' gap={{ ...rem(6) }}>
+        <Grid h='80%' overflowY={'scroll'} w='100%'>
           {dateItem?.events?.map((eventItem, index) => (
             <GridItem key={(i => i)(index)}>
               <CalendarEventItem event={eventItem} />

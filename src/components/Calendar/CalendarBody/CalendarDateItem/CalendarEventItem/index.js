@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box, Progress, Text } from '@chakra-ui/react'
+import { Box, Flex, Text } from '@chakra-ui/react'
 import { rem } from 'helpers/misc'
 
 const CustomCard = React.forwardRef(({ children, ...rest }, ref) => (
@@ -15,30 +15,30 @@ CustomCard.propTypes = {
 const CalendarEventItem = ({ event = {} }) => {
   const onClick = () => (event?.onEventClick ? event.onEventClick() : undefined)
   return (
-    <Box cursor='pointer' onClick={onClick} pos='relative' w='100%'>
-      <Progress
-        colorScheme={event?.color || 'brandOrange'}
-        value={event?.progressValue?.toFixed(0) || 0}
-        max={event?.maxValue || 100}
-        min={event?.minValue || 0}
+    <Box
+      cursor='pointer'
+      bg={`${event.color || '#67CBAC'}1A 0% 0% no-repeat padding-box;`}
+      onClick={onClick}
+      pos='relative'
+      w='100%'
+    >
+      <Flex
+        borderLeftWidth={5}
+        borderLeftColor={`${event.color || '#67CBAC'}33`}
         w='100%'
-        h={{ ...rem(26) }}
-        borderRadius={{ ...rem(6) }}
-        bg={event?.bg || '#FFE499'}
-      />
-      <Text
-        top='18%'
-        w='90%'
-        color='#333333'
-        className='farm-line-clamp'
-        left={{ ...rem(10) }}
-        fontSize={{ ...rem(12) }}
-        lineHeight={{ ...rem(15) }}
-        fontWeight={400}
-        position='absolute'
+        h={{ ...rem(30) }}
+        justify='center'
+        align='center'
       >
-        {event?.name}
-      </Text>
+        <Text
+          color={event.color || '#67CBAC'}
+          fontSize='md'
+          fontFamily='Avenir'
+          fontStyle='normal'
+        >
+          {event.name}
+        </Text>
+      </Flex>
     </Box>
   )
 }
