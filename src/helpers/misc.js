@@ -43,3 +43,44 @@ export const reduceToGroups = (array, key, keysToPush = []) =>
     categories[t(item, key).safeObject] = category
     return categories
   }, {})
+
+export const toastSuccess = (title, res, toast) => {
+  toast({
+    title,
+    isClosable: true,
+    description: res.message,
+    status: 'success',
+    duration: 5000,
+    position: 'top-right'
+  })
+}
+
+export const toastError = (error, toast, setSession) => {
+  if (error) {
+    if ([401, 403].includes(error.status)) {
+      if (setSession) {
+        setSession(false)
+      }
+    } else {
+      toast({
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+        position: 'top-right',
+        title: 'An error occurred.',
+        description: `${
+          error?.data?.message || error?.message || 'Unknown error occurred'
+        }.`
+      })
+    }
+  } else {
+    toast({
+      status: 'error',
+      duration: 2000,
+      isClosable: true,
+      position: 'top-right',
+      title: 'An error occurred.',
+      description: 'Unexpected network error.'
+    })
+  }
+}

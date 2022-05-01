@@ -20,7 +20,7 @@ const BalanceOfTasks = () => {
   const { isAuthenticated } = useAuth()
   const { user } = isAuthenticated()
   const { data, isLoading, error, refetch } = useQuery(
-    [`user${user?._id}`],
+    [`tasks_user${user?._id}`],
     async () => {
       if (user?._id) {
         return await getTasks({ user: user?._id })
