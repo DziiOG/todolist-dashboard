@@ -23,6 +23,14 @@
   }
   
   @font-face {
+    font-family: "CaligatureHunters";
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: url("../fonts/CaligatureHunters-eZ4Wl.otf") format("opentype");
+  }
+
+  @font-face {
     font-family: "Avenir";
     font-weight: 500;
     font-style: normal;
@@ -45,6 +53,8 @@
     font-display: swap;
     src: url("../fonts/Avenir-Black.ttf") format("truetype");
   }
+
+
   
   .active-link.active {
     color: #000;
