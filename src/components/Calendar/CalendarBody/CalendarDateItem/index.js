@@ -1,12 +1,16 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Box, Flex, Grid, GridItem, Text } from '@chakra-ui/react'
 import { rem } from 'helpers/misc'
-import CalendarEventItem from './CalendarEventItem'
+import CalendarEvent from './CalendarEventItem'
 
-const CalendarDateItem = ({ dateItem, currentDay }) => (
+const CalendarDateItem = ({ dateItem, currentDay, myRef }) => (
   <Box
     w={{ base: '100%' }}
+    onClick={() => {
+      myRef?.current?.click()
+    }}
     h={{ ...rem(95) }}
     bg={'white'}
     border={currentDay && '3px solid #0066CC'}
@@ -37,10 +41,10 @@ const CalendarDateItem = ({ dateItem, currentDay }) => (
         </Text>
       </Flex>
       {dateItem?.dayNumber && dateItem?.events?.length > 0 ? (
-        <Grid h='80%' overflowY={'scroll'} w='100%'>
+        <Grid position='relative' h='80%' overflowY={'scroll'} w='100%'>
           {dateItem?.events?.map((eventItem, index) => (
             <GridItem key={(i => i)(index)}>
-              <CalendarEventItem event={eventItem} />
+              <CalendarEvent event={eventItem} />
             </GridItem>
           ))}
         </Grid>

@@ -4,7 +4,7 @@ import { Box } from '@chakra-ui/react'
 import { rem } from 'helpers/misc'
 
 const CalendarWrapper = ({ children, ...rest }) => (
-  <Box w='100%'>
+  <Box w='100%' position='relative'>
     <Box
       bg={rest?.bg || 'white'}
       my={rest?.my || { ...rem(24) }}

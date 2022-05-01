@@ -1,27 +1,37 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box, Flex, Text } from '@chakra-ui/react'
+import {
+  Box,
+  Flex,
+  PopoverTrigger,
+  // Popover,
+  // PopoverArrow,
+  // PopoverBody,
+  // PopoverCloseButton,
+  // PopoverContent,
+  // PopoverFooter,
+  // PopoverHeader,
+  // PopoverTrigger,
+  // Portal,
+  Text
+} from '@chakra-ui/react'
 import { rem } from 'helpers/misc'
+import Button from 'components/Button'
 
-const CustomCard = React.forwardRef(({ children, ...rest }, ref) => (
-  <Box bg='red' ref={ref} {...rest}>
-    {children}
-  </Box>
-))
-
-CustomCard.propTypes = {
-  children: PropTypes.any
-}
-const CalendarEventItem = ({ event = {} }) => {
+const EventItem = ({ event = {} }) => {
   const onClick = () => (event?.onEventClick ? event.onEventClick() : undefined)
   return (
     <Box
+      as='button'
       cursor='pointer'
       bg={`${event.color || '#67CBAC'}1A 0% 0% no-repeat padding-box;`}
       onClick={onClick}
-      pos='relative'
       w='100%'
     >
+      <PopoverTrigger>
+        <Button display={'none'} />
+      </PopoverTrigger>
+
       <Flex
         borderLeftWidth={5}
         borderLeftColor={`${event.color || '#67CBAC'}33`}
@@ -43,7 +53,7 @@ const CalendarEventItem = ({ event = {} }) => {
   )
 }
 
-CalendarEventItem.propTypes = {
+EventItem.propTypes = {
   event: PropTypes.shape({
     bg: PropTypes.any,
     color: PropTypes.any,
@@ -57,5 +67,14 @@ CalendarEventItem.propTypes = {
     toolTipCardProps: PropTypes.object
   })
 }
+const CalendarEvent = ({ event }) => (
+  <>
+    <EventItem event={event} />
+  </>
+)
 
-export default CalendarEventItem
+CalendarEvent.propTypes = {
+  event: PropTypes.any
+}
+
+export default CalendarEvent
