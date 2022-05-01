@@ -22,12 +22,12 @@ const CalendarDateManipulator = () => {
   const { handleClick: handleModalClick } = useComponent()
   const _rem = useRem()
   return (
-    <Flex justify='flex-end' align='center' w='100%'>
+    <Flex justify='space-between' align='center' w='100%'>
       <Flex cursor='pointer' justify='flex-end' align='center'>
         <Icon
           as={MdOutlineArrowBackIos}
           color='cf.400'
-          boxSize={_rem(10)}
+          boxSize={_rem(16)}
           mr={{ ...rem(23.6) }}
           onClick={() => {
             handleMonthDecrease()
@@ -60,7 +60,7 @@ const CalendarDateManipulator = () => {
             handleMonthIncrease()
           }}
           color='cf.400'
-          boxSize={_rem(10)}
+          boxSize={_rem(16)}
           ml={{ ...rem(23.6) }}
         />
       </Flex>
