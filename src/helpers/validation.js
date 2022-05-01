@@ -15,3 +15,10 @@ export const TaskSchema = Yup.object().shape({
   dueDate: Yup.date().required('Due Date is required'),
   category: Yup.string().required()
 })
+
+export const SignInSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email')
+    .required('This field is required*'),
+  password: Yup.string().required('This field is required*')
+})
