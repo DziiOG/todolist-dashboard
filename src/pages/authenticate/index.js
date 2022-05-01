@@ -1,4 +1,12 @@
-import { Box, Checkbox, Flex, Icon, Image, Text } from '@chakra-ui/react'
+import {
+  Box,
+  Checkbox,
+  Flex,
+  Icon,
+  Image,
+  Text,
+  useToast
+} from '@chakra-ui/react'
 import Button from 'components/Button'
 import FormCard from 'components/Cards/Form'
 import { rem } from 'helpers/misc'
@@ -9,11 +17,15 @@ import { FormInput, FormPassword } from 'components/Form'
 import { useFormik } from 'formik'
 import useAuth from 'context/useAuth'
 import { useNavigate } from 'react-router-dom'
+import useApi from 'context/useApi'
 
 const Authenticate = () => {
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, storeInLocal, store } = useAuth()
   const navigate = useNavigate()
   const { user } = isAuthenticated()
+  const toast = useToast()
+  const { login } = useApi()
+  const [rememberMe, setRememberMe] = React.useState(false)
 
   React.useEffect(() => {
     if (user) {
@@ -26,7 +38,44 @@ const Authenticate = () => {
       password: ''
     },
     enableReinitialize: true,
-    onSubmit: () => {}
+    onSubmit: async (values, { setSubmitting }) => {
+      try {
+        setSubmitting(true)
+        const response = await login(values)
+        rememberMe && storeInLocal(response.data)
+        store(response.data)
+      } catch (error) {
+        if (error) {
+          if (error.status === 400) {
+            toast({
+              title: 'Error Occurred',
+              description: error.data.message,
+              status: 'error',
+              position: 'top-right',
+              duration: 5000
+            })
+          } else {
+            toast({
+              title: 'Error Occurred',
+              description: error.message,
+              status: 'error',
+              position: 'top-right',
+              duration: 5000
+            })
+          }
+        } else {
+          toast({
+            title: 'Error Occurred',
+            description: 'Unexpected network error.',
+            status: 'error',
+            position: 'top-right',
+            duration: 5000
+          })
+        }
+      } finally {
+        setSubmitting(false)
+      }
+    }
   })
 
   const { values, errors, touched, handleBlur, handleChange, setFieldTouched } =
@@ -115,7 +164,7 @@ const Authenticate = () => {
               fontSize={{ base: 'xs', md: 'sm' }}
               size='sm'
               colorScheme='cfButton'
-              onChange={() => {}}
+              onChange={e => setRememberMe(e.target.checked)}
               borderColor='cfButton.500'
             >
               <Text

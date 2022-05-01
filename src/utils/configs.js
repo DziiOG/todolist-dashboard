@@ -3,9 +3,11 @@
  * @function
  *
  * */
-const configs = () =>
+const configs = () => {
   // Get REACT ENV
-  //   const ENV = process.env.REACT_APP_ENVIRONMENT
-  ({})
-
+  const ENV = process.env.REACT_APP_ENVIRONMENT
+  return {
+    TODO_LIST_API: process.env[`REACT_APP_${ENV}_TODO_LIST_API`]
+  }
+}
 export default configs
