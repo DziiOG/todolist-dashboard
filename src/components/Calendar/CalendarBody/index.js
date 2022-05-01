@@ -19,6 +19,7 @@ import useCalendar from 'context/useCalendar'
 import { rem } from 'helpers/misc'
 import CustomButton from 'components/Button'
 import { BsClock } from 'react-icons/bs'
+import useComponent from 'context/useComponent'
 import CalendarDateItem from './CalendarDateItem'
 
 const PopCanContainer = ({
@@ -28,6 +29,7 @@ const PopCanContainer = ({
   dateItem
 }) => {
   const ref = React.useRef()
+  const { handleModalClick } = useComponent()
 
   return (
     <GridItem key={(i => i)(index)} h='100%' w='100%'>
@@ -126,6 +128,9 @@ const PopCanContainer = ({
               </Box>
             </Flex>
             <CustomButton
+              onClick={() => {
+                handleModalClick('taskModal')
+              }}
               borderRadius={{ ...rem(10) }}
               h={{ ...rem(40) }}
               w='100%'
