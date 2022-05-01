@@ -1,17 +1,15 @@
 import React from 'react'
 import { Navigate, Routes, Route } from 'react-router-dom'
-// import Auth from 'pages/auth'
 import NotFound from 'pages/NotFound'
 import Pages from 'pages'
 import Splash from 'components/Loading/Splash'
-// import Guard from './Guard'
+import Auth from 'pages/auth'
 
 export const transition = { duration: 0.6, ease: 'easeInOut' }
 
 const { Dashboard, Settings, Authenticate, Tasks, Calender, Support } = Pages
 
 const routers = [
-  { path: 'authenticate', element: Authenticate },
   {
     path: 'dashboard',
     element: Dashboard
@@ -38,8 +36,9 @@ const Router = () => (
   <React.Suspense fallback={<Splash />}>
     <Routes>
       <Route path='/' element={<Navigate to='/dashboard' />} />
-      {/* <Route path='auth' element={<Auth />} /> */}
-      {/* <Route path='auth/:token' element={<Auth />} /> */}
+      <Route path='auth' element={<Auth />} />
+      <Route path='auth/:token' element={<Auth />} />
+      <Route path='authenticate' element={<Authenticate />} />
       {routers.map((route, index) => {
         const Component = route.element
         return (
