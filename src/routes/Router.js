@@ -8,17 +8,10 @@ import Splash from 'components/Loading/Splash'
 
 export const transition = { duration: 0.6, ease: 'easeInOut' }
 
-const {
-  Dashboard,
-  Settings,
-  Authorization,
-  //  Login, Signup,
-  Tasks,
-  Calender,
-  Support
-} = Pages
+const { Dashboard, Settings, Authenticate, Tasks, Calender, Support } = Pages
 
 const routers = [
+  { path: 'authenticate', element: Authenticate },
   {
     path: 'dashboard',
     element: Dashboard
@@ -45,7 +38,6 @@ const Router = () => (
   <React.Suspense fallback={<Splash />}>
     <Routes>
       <Route path='/' element={<Navigate to='/dashboard' />} />
-      <Route path='/authorization/users' element={Authorization} />
       {/* <Route path='auth' element={<Auth />} /> */}
       {/* <Route path='auth/:token' element={<Auth />} /> */}
       {routers.map((route, index) => {
