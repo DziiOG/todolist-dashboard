@@ -18,14 +18,19 @@ import {
 import { rem } from 'helpers/misc'
 import Button from 'components/Button'
 
-const EventItem = ({ event = {} }) => {
+const EventItem = ({ event = {}, myRef }) => {
   const onClick = () => (event?.onEventClick ? event.onEventClick() : undefined)
   return (
     <Box
       as='button'
+      onClick={e => {
+        myRef?.current?.click()
+        if (onClick) {
+          onClick(e)
+        }
+      }}
       cursor='pointer'
       bg={`${event.color || '#67CBAC'}1A 0% 0% no-repeat padding-box;`}
-      onClick={onClick}
       w='100%'
     >
       <PopoverTrigger>
@@ -63,18 +68,24 @@ EventItem.propTypes = {
     name: PropTypes.string,
     onEventClick: PropTypes.func,
     progressValue: PropTypes.number,
-    toolTipProps: PropTypes.object,
-    toolTipCardProps: PropTypes.object
+    toolTipCardProps: PropTypes.object,
+    toolTipProps: PropTypes.object
+  }),
+  myRef: PropTypes.shape({
+    current: PropTypes.shape({
+      click: PropTypes.func
+    })
   })
 }
-const CalendarEvent = ({ event }) => (
+const CalendarEvent = ({ event, myRef }) => (
   <>
-    <EventItem event={event} />
+    <EventItem event={event} myRef={myRef} />
   </>
 )
 
 CalendarEvent.propTypes = {
-  event: PropTypes.any
+  event: PropTypes.any,
+  myRef: PropTypes.any
 }
 
 export default CalendarEvent

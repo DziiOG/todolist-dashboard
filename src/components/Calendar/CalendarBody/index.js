@@ -21,7 +21,12 @@ import CustomButton from 'components/Button'
 import { BsClock } from 'react-icons/bs'
 import CalendarDateItem from './CalendarDateItem'
 
-const TestC = ({ index, isCurrentDay, isWeekDayHeader, dateItem }) => {
+const PopCanContainer = ({
+  index,
+  isCurrentDay,
+  isWeekDayHeader,
+  dateItem
+}) => {
   const ref = React.useRef()
 
   return (
@@ -133,7 +138,7 @@ const TestC = ({ index, isCurrentDay, isWeekDayHeader, dateItem }) => {
   )
 }
 
-TestC.propTypes = {
+PopCanContainer.propTypes = {
   dateItem: PropTypes.shape({
     date: PropTypes.any
   }),
@@ -157,7 +162,7 @@ const CalendarBody = () => {
         overflowY='scroll'
       >
         {slots?.map((dateItem, index) => (
-          <TestC
+          <PopCanContainer
             {...{ index, isCurrentDay, isWeekDayHeader, dateItem }}
             key={index}
           />

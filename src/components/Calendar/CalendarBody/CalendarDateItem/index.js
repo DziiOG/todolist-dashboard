@@ -8,9 +8,6 @@ import CalendarEvent from './CalendarEventItem'
 const CalendarDateItem = ({ dateItem, currentDay, myRef }) => (
   <Box
     w={{ base: '100%' }}
-    onClick={() => {
-      myRef?.current?.click()
-    }}
     h={{ ...rem(95) }}
     bg={'white'}
     border={currentDay && '3px solid #0066CC'}
@@ -44,7 +41,7 @@ const CalendarDateItem = ({ dateItem, currentDay, myRef }) => (
         <Grid position='relative' h='80%' overflowY={'scroll'} w='100%'>
           {dateItem?.events?.map((eventItem, index) => (
             <GridItem key={(i => i)(index)}>
-              <CalendarEvent event={eventItem} />
+              <CalendarEvent event={eventItem} myRef={myRef} />
             </GridItem>
           ))}
         </Grid>
