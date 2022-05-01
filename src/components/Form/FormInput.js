@@ -64,7 +64,7 @@ const FormInput = ({
     )}
     <InputGroup>
       {leftIcon && (
-        <InputLeftElement pointerEvents='none' color='gray.400' pt={1}>
+        <InputLeftElement pointerEvents='none' color='gray.400' pt={4}>
           <Icon as={leftIcon} boxSize={6} color='#29325a' />
         </InputLeftElement>
       )}

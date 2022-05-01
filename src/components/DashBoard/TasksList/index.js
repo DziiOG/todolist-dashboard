@@ -59,8 +59,8 @@ export const columns = [
           {
             id: 1,
             name: 'Edit',
-            path: `/tasks/${row?._id}`,
-            state: row
+            state: 'taskModal',
+            data: row
           },
           {
             id: 2,

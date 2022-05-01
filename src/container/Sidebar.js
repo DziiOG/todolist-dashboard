@@ -46,9 +46,9 @@ const Sidebar = ({ page }) => {
   return (
     <Box
       as='aside'
-      w='14%'
       gridArea='aside'
       pos='fixed'
+      w='14%'
       overflowY='scroll'
       bottom={0}
       left={0}
