@@ -1,20 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-  Box,
-  Flex,
-  PopoverTrigger,
-  // Popover,
-  // PopoverArrow,
-  // PopoverBody,
-  // PopoverCloseButton,
-  // PopoverContent,
-  // PopoverFooter,
-  // PopoverHeader,
-  // PopoverTrigger,
-  // Portal,
-  Text
-} from '@chakra-ui/react'
+import { Box, Flex, PopoverTrigger, Text } from '@chakra-ui/react'
 import { rem } from 'helpers/misc'
 import Button from 'components/Button'
 

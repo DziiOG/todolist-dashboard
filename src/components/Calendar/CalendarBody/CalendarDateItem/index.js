@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Box, Flex, Grid, GridItem, Text } from '@chakra-ui/react'
@@ -54,15 +53,16 @@ CalendarDateItem.propTypes = {
   currentDay: PropTypes.string,
   dateItem: PropTypes.shape({
     dayNumber: PropTypes.any,
-    task: PropTypes.any,
     events: PropTypes.shape({
       length: PropTypes.number,
       map: PropTypes.func
     }),
+    task: PropTypes.any,
     weekDay: PropTypes.any
   }),
   dayNumber: PropTypes.number,
-  events: PropTypes.any
+  events: PropTypes.any,
+  myRef: PropTypes.any
 }
 
 export default CalendarDateItem

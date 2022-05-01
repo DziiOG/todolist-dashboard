@@ -1,9 +1,7 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import { Box, GridItem, Text, Flex } from '@chakra-ui/react'
 import { rem } from 'helpers/misc'
 import DoughnutChart from './DoughnutChart'
-// import Doughnut from './DoughnutChart'
 
 const BalanceOfTasks = () => {
   const tasks = [

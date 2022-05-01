@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import { Box, Grid, GridItem, HStack, Stack } from '@chakra-ui/react'
 import PropTypes from 'prop-types'
