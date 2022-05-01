@@ -4,6 +4,7 @@ import NotFound from 'pages/NotFound'
 import Pages from 'pages'
 import Splash from 'components/Loading/Splash'
 import Auth from 'pages/auth'
+import Guard from './Guard'
 
 export const transition = { duration: 0.6, ease: 'easeInOut' }
 
@@ -45,7 +46,11 @@ const Router = () => (
           <Route
             key={(i => i)(index)}
             path={route.path}
-            element={<Component {...(route?.props || {})} />}
+            element={
+              <Guard>
+                <Component {...(route?.props || {})} />
+              </Guard>
+            }
           />
         )
       })}

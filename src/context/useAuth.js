@@ -44,7 +44,7 @@ export const AuthContextProvider = ({ children }) => {
         clearRemote && (await http.get({ url: `${TODO_LIST_API}/logout` }))
         window.sessionStorage.clear()
         window.localStorage.clear()
-        navigate('/authorization/users')
+        navigate('/authenticate')
       } catch (error) {
         return error
       }

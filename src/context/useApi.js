@@ -14,13 +14,15 @@ export const ApiContextProvider = ({ children }) => {
       body: JSON.stringify(payload)
     })
 
-  ;<ApiContext.Provider
-    value={{
-      login
-    }}
-  >
-    {children}
-  </ApiContext.Provider>
+  return (
+    <ApiContext.Provider
+      value={{
+        login
+      }}
+    >
+      {children}
+    </ApiContext.Provider>
+  )
 }
 
 ApiContextProvider.propTypes = {

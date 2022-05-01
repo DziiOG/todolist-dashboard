@@ -98,7 +98,8 @@ const Authenticate = () => {
     handleChange,
     setFieldTouched,
     isSubmitting,
-    dirty
+    dirty,
+    handleSubmit
   } = formik
 
   return (
@@ -110,7 +111,7 @@ const Authenticate = () => {
       align='center'
       direction='column'
     >
-      <form>
+      <form onSubmit={handleSubmit}>
         <Flex
           h={20}
           py={5}
