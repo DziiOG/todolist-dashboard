@@ -1,3 +1,4 @@
+import { t } from 'typy'
 import configs from '../utils/configs'
 
 export const replaceURI = (APP, path) => {
@@ -26,3 +27,19 @@ export const rem = pixel => ({
   '4xl': pixelToRem(ePv(pixel, 1440, 1536)), // 1536
   '5xl': pixelToRem(ePv(pixel)) // 1920
 })
+
+export const reduceToGroups = (array, key, keysToPush = []) =>
+  (array || []).reduce((categories, item) => {
+    const category = categories[t(item, key).safeObject] || []
+    if (keysToPush.length > 0) {
+      const newObj = {}
+      for (let index = 0; index < keysToPush.length; index++) {
+        newObj[keysToPush[index]] = item[keysToPush[index]]
+      }
+      category.push(newObj)
+    } else {
+      category.push(item)
+    }
+    categories[t(item, key).safeObject] = category
+    return categories
+  }, {})
