@@ -1,11 +1,12 @@
 import { Box, Heading } from '@chakra-ui/react'
 import CalenderDashboard from 'components/DashBoard/Calendar'
+import Categories from 'components/DashBoard/Categories'
 import Layout from 'container/Layout'
 import { rem } from 'helpers/misc'
 import React from 'react'
 
 const Calender = () => (
-  <Layout page={3} disableHeader rightPanel>
+  <Layout page={3} disableHeader rightPanel rightPanelChildren={<Categories />}>
     <Box w='100%'>
       <Heading fontFamily='Avenir' fontWeight={900} fontSize='2xl'>
         Calender

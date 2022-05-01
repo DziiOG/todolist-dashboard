@@ -2,7 +2,7 @@ import * as Yup from 'yup'
 
 export const CategorySchema = Yup.object().shape({
   name: Yup.string().required(' Name is required.'),
-  description: Yup.string().required('Category description  is required.'),
+  color: Yup.string().required('Category description  is required.'),
   user: Yup.string().required('User is required')
 })
 
