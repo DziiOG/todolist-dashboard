@@ -41,7 +41,7 @@ export default function Categories() {
           ))}
       </Flex>
 
-      <Flex color='#677acb' mt={5} align='center'>
+      <Flex as='button' cursor='pointer' color='#677acb' mt={5} align='center'>
         <Text
           fontFamily='Avenir'
           onClick={() => {
