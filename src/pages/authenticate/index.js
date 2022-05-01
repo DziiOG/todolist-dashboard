@@ -1,4 +1,4 @@
-import { Flex, Icon, Image } from '@chakra-ui/react'
+import { Box, Flex, Icon, Image } from '@chakra-ui/react'
 import Button from 'components/Button'
 import FormCard from 'components/Cards/Form'
 import { rem } from 'helpers/misc'
@@ -54,20 +54,22 @@ const Authenticate = () => {
           />
           <Image alt='sign in with us' w='100%' mt={8} src={SignLine} />
 
-          <FormInput
-            label='Email'
-            required
-            placeholder='Email'
-            id='email'
-            name='email'
-            h={{ ...rem(45) }}
-            value={values.email}
-            error={errors.email}
-            touched={touched.email}
-            onBlur={handleBlur}
-            onChange={handleChange}
-            setFieldTouched={setFieldTouched}
-          />
+          <Box w='100%' mt={10}>
+            <FormInput
+              label='Email'
+              required
+              placeholder='mary@example.com'
+              id='email'
+              name='email'
+              h={{ ...rem(45) }}
+              value={values.email}
+              error={errors.email}
+              touched={touched.email}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              setFieldTouched={setFieldTouched}
+            />
+          </Box>
         </FormCard>
       </Flex>
     </Flex>
