@@ -15,6 +15,7 @@ import {
 // import { BsBell } from 'react-icons/bs'
 import { Bell, ChevronDown, Search } from 'theme/custom-icons'
 import { rem } from 'helpers/misc'
+import useAuth from 'context/useAuth'
 
 export const SearchInput = ({ ...rest }) => (
   <InputGroup
@@ -42,46 +43,53 @@ export const SearchInput = ({ ...rest }) => (
     />
   </InputGroup>
 )
-const Navbar = ({ disableSearch }) => (
-  <Flex
-    w='86%'
-    as='nav'
-    gridArea='header'
-    align='center'
-    bg='white'
-    justify='space-between'
-    h={{ md: 16 }}
-    pos='fixed'
-    zIndex={50}
-    px={{ md: 24 }}
-    py={{ md: 10 }}
-  >
-    <Flex justify='right' w='75%'>
-      {!disableSearch && (
-        <Stack spacing={4}>
-          <SearchInput />
-        </Stack>
-      )}
-    </Flex>
-    <HStack w='25%' spacing='1.5rem'>
-      <Flex align='center' w='100%' justify='right'>
-        <Box mr={10}>
-          <Icon as={Bell} color='#29325a' boxSize={6} />
-        </Box>
-        <Box mx={4} pos='relative'>
-          <Avatar size='md' />
-        </Box>
-        <Box>
-          <Text> Janet Jackson </Text>
-        </Box>
-        <Box mx={2}>
-          <Icon as={ChevronDown} size={6} />
-        </Box>
+const Navbar = ({ disableSearch }) => {
+  const { isAuthenticated } = useAuth()
+  const { user } = isAuthenticated()
+  return (
+    <Flex
+      w='86%'
+      as='nav'
+      gridArea='header'
+      align='center'
+      bg='white'
+      justify='space-between'
+      h={{ md: 16 }}
+      pos='fixed'
+      zIndex={50}
+      px={{ md: 24 }}
+      py={{ md: 10 }}
+    >
+      <Flex justify='right' w='75%'>
+        {!disableSearch && (
+          <Stack spacing={4}>
+            <SearchInput />
+          </Stack>
+        )}
       </Flex>
-    </HStack>
-  </Flex>
-)
-
+      <HStack w='25%' spacing='1.5rem'>
+        <Flex align='center' w='100%' justify='right'>
+          <Box mr={10}>
+            <Icon as={Bell} color='#29325a' boxSize={6} />
+          </Box>
+          <Box mx={4} pos='relative'>
+            <Avatar
+              size='md'
+              src={user?.avatar}
+              name={`${user?.firstName || ''} ${user?.lastName || ''}`}
+            />
+          </Box>
+          <Box>
+            <Text>{`${user?.firstName || ''} ${user?.lastName || ''}`}</Text>
+          </Box>
+          <Box mx={2}>
+            <Icon as={ChevronDown} size={6} />
+          </Box>
+        </Flex>
+      </HStack>
+    </Flex>
+  )
+}
 Navbar.propTypes = {
   disableSearch: PropTypes.any
 }
