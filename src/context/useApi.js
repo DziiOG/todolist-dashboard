@@ -14,10 +14,17 @@ export const ApiContextProvider = ({ children }) => {
       body: JSON.stringify(payload)
     })
 
+  const getTasks = async query =>
+    await http.get({
+      url: `${TODO_LIST_API}/tasks`,
+      query
+    })
+
   return (
     <ApiContext.Provider
       value={{
-        login
+        login,
+        getTasks
       }}
     >
       {children}
