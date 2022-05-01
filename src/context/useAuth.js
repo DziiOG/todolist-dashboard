@@ -1,24 +1,24 @@
 import React, { useState, useEffect, createContext } from 'react'
 import PropTypes from 'prop-types'
 import http from 'utils/httpFacade'
-import { replaceURI } from 'helpers/misc'
 import configs from 'utils/configs'
-import { useMatch } from 'react-router-dom'
+import { useMatch, useNavigate } from 'react-router-dom'
 import { useQuery } from 'react-query'
 // Setup Config
-const AUTH_API = configs().AUTH_API
+const TODO_LIST_API = configs().TODO_LIST_API
 
 const AuthContext = createContext()
 
 export const AuthContextProvider = ({ children }) => {
   const authPattern = useMatch('/auth/:token')
+  const navigate = useNavigate()
   const [tempUser, setTempUser] = React.useState(undefined)
   const token =
     authPattern?.params?.token || window.sessionStorage.getItem('_cft')
   const [session, setSession] = useState(true)
 
   const getUser = async () =>
-    await http.get({ url: `${AUTH_API}/users/profile` })
+    await http.get({ url: `${TODO_LIST_API}/users/profile` })
 
   const {
     data: user,
@@ -36,15 +36,18 @@ export const AuthContextProvider = ({ children }) => {
     }
   }, [isSuccess, user?.data, userIsFetch])
 
-  const logout = async (clearRemote = false) => {
-    try {
-      clearRemote && (await http.get({ url: `${AUTH_API}/logout` }))
-      window.sessionStorage.clear()
-      replaceURI('AUTH', '/redirects?from=GROWER_ADMIN&off=true')
-    } catch (error) {
-      return error
-    }
-  }
+  const logout = React.useCallback(
+    async (clearRemote = false) => {
+      try {
+        clearRemote && (await http.get({ url: `${TODO_LIST_API}/logout` }))
+        window.sessionStorage.clear()
+        navigate('/authorization/users')
+      } catch (error) {
+        return error
+      }
+    },
+    [navigate]
+  )
 
   React.useEffect(() => {
     let mounted = true
@@ -76,7 +79,7 @@ export const AuthContextProvider = ({ children }) => {
     let mounted = true
     if (!session && mounted) return logout(true)
     return () => (mounted = false)
-  }, [session])
+  }, [logout, session])
 
   const store = ({ token: authToken, user: individual }) => {
     if (authToken || token)

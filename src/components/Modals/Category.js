@@ -155,7 +155,6 @@ const CategoryModal = () => {
     isSubmitting,
     setFieldValue
   } = formik
-  console.log(values, '')
 
   return (
     <ModalWrapper

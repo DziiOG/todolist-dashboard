@@ -33,7 +33,7 @@ const Auth = () => {
     let mounted = true
     if (mounted) {
       if (loggedInUser) {
-        setRedirectTo(to || 'overview')
+        setRedirectTo(to || 'dashboard')
       } else if (token) {
         store({ token })
       } else {

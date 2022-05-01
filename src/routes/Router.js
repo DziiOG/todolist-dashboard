@@ -11,6 +11,7 @@ export const transition = { duration: 0.6, ease: 'easeInOut' }
 const {
   Dashboard,
   Settings,
+  Authorization,
   //  Login, Signup,
   Tasks,
   Calender,
@@ -44,6 +45,7 @@ const Router = () => (
   <React.Suspense fallback={<Splash />}>
     <Routes>
       <Route path='/' element={<Navigate to='/dashboard' />} />
+      <Route path='/authorization/users' element={Authorization} />
       {/* <Route path='auth' element={<Auth />} /> */}
       {/* <Route path='auth/:token' element={<Auth />} /> */}
       {routers.map((route, index) => {
