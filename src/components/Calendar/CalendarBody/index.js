@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-/* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types'
 import React from 'react'
 import {
@@ -10,15 +8,10 @@ import {
   GridItem,
   Icon,
   Popover,
-  PopoverArrow,
   PopoverBody,
   PopoverCloseButton,
   PopoverContent,
-  PopoverFooter,
-  PopoverHeader,
   PopoverTrigger,
-  Portal,
-  Tag,
   Text
 } from '@chakra-ui/react'
 import moment from 'moment'
