@@ -1,9 +1,10 @@
-import { Flex, Icon } from '@chakra-ui/react'
+import { Flex, Icon, Image } from '@chakra-ui/react'
 import Button from 'components/Button'
 import FormCard from 'components/Cards/Form'
 import { rem } from 'helpers/misc'
 import React from 'react'
 import { FcGoogle } from 'react-icons/fc'
+import SignLine from 'assets/images/line.png'
 
 const Authenticate = () => (
   <Flex as='main' h='100vh' bg='gray.100' align='center' direction='column'>
@@ -23,6 +24,8 @@ const Authenticate = () => (
         w={{ base: '90%', lg: 110 }}
       >
         <Button
+          mt={{ ...rem(56) }}
+          _hover={{ bg: 'white' }}
           bg='#FFFFFF 0% 0% no-repeat padding-box'
           fontSize='md'
           fontFamily='Avenir'
@@ -34,6 +37,7 @@ const Authenticate = () => (
           title='Continue with google'
           leftIcon={<Icon as={FcGoogle} boxSize={6} />}
         />
+        <Image alt='sign in with us' w='100%' mt={8} src={SignLine} />
       </FormCard>
     </Flex>
   </Flex>
