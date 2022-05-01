@@ -14,7 +14,9 @@ export const AuthContextProvider = ({ children }) => {
   const navigate = useNavigate()
   const [tempUser, setTempUser] = React.useState(undefined)
   const token =
-    authPattern?.params?.token || window.sessionStorage.getItem('_cft')
+    authPattern?.params?.token ||
+    window.sessionStorage.getItem('_cft') ||
+    window.localStorage.getItem('_cft')
   const [session, setSession] = useState(true)
 
   const getUser = async () =>
@@ -41,6 +43,7 @@ export const AuthContextProvider = ({ children }) => {
       try {
         clearRemote && (await http.get({ url: `${TODO_LIST_API}/logout` }))
         window.sessionStorage.clear()
+        window.localStorage.clear()
         navigate('/authorization/users')
       } catch (error) {
         return error
@@ -92,9 +95,24 @@ export const AuthContextProvider = ({ children }) => {
     }
   }
 
+  const storeInLocal = ({ token: authToken, user: individual }) => {
+    if (authToken || token)
+      window.localStorage.setItem('_cft', authToken || token)
+    if (individual || user?.data || tempUser) {
+      window.localStorage.setItem(
+        '_cfu',
+        JSON.stringify(individual || user?.data || tempUser)
+      )
+    }
+  }
+
   const isAuthenticated = () => {
-    const _cft = window.sessionStorage.getItem('_cft')
-    const _cfu = window.sessionStorage.getItem('_cfu')
+    const _cft =
+      window.localStorage.getItem('_cft') ||
+      window.sessionStorage.getItem('_cft')
+    const _cfu =
+      window.localStorage.getItem('_cfu') ||
+      window.sessionStorage.getItem('_cfu')
 
     return {
       token: _cft,
@@ -109,6 +127,7 @@ export const AuthContextProvider = ({ children }) => {
         token,
         store,
         logout,
+        storeInLocal,
         getUser,
         session,
         setSession,

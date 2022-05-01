@@ -7,8 +7,19 @@ import { FcGoogle } from 'react-icons/fc'
 import SignLine from 'assets/images/line.png'
 import { FormInput, FormPassword } from 'components/Form'
 import { useFormik } from 'formik'
+import useAuth from 'context/useAuth'
+import { useNavigate } from 'react-router-dom'
 
 const Authenticate = () => {
+  const { isAuthenticated } = useAuth()
+  const navigate = useNavigate()
+  const { user } = isAuthenticated()
+
+  React.useEffect(() => {
+    if (user) {
+      navigate('/dashboard')
+    }
+  }, [navigate, user])
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -22,7 +33,14 @@ const Authenticate = () => {
     formik
 
   return (
-    <Flex as='main' h='100vh' bg='gray.100' align='center' direction='column'>
+    <Flex
+      as='main'
+      h='100vh'
+      overflow='scroll'
+      bg='gray.100'
+      align='center'
+      direction='column'
+    >
       <Flex
         h={20}
         py={5}
@@ -31,7 +49,13 @@ const Authenticate = () => {
         align='center'
         px={{ base: 4, md: 20 }}
       />
-      <Flex py={{ base: 4, lg: 10 }} w='full' align='center' justify='center'>
+      <Flex
+        bg='gray.100'
+        py={{ base: 4, lg: 10 }}
+        w='full'
+        align='center'
+        justify='center'
+      >
         <FormCard
           mt={12}
           textAlign='center'
@@ -118,8 +142,8 @@ const Authenticate = () => {
             fontSize='xl'
             h={{ ...rem(50) }}
           />
-          <Flex align='center' justify='center'>
-            <Text fontSize={{ base: 'xs', md: 'sm' }} mr={4}>
+          <Flex w='100%' mt={3} align='center' justify='center'>
+            <Text color='#29325A' fontSize={{ base: 'xs', md: 'md' }} mr={4}>
               Not registered yet?
             </Text>
             <Box cursor='pointer' _focus={{ textDecor: 'none' }}>

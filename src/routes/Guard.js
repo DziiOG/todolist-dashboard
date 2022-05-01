@@ -16,7 +16,7 @@ const Guard = ({ children }) => {
   }, [session, navigate])
 
   React.useEffect(() => {
-    if (false && (!token || !user)) {
+    if (!token || !user) {
       return navigate('/auth')
     }
   }, [navigate, token, user])
