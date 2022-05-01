@@ -1,11 +1,11 @@
-import { Box, Flex, Icon, Image } from '@chakra-ui/react'
+import { Box, Checkbox, Flex, Icon, Image, Text } from '@chakra-ui/react'
 import Button from 'components/Button'
 import FormCard from 'components/Cards/Form'
 import { rem } from 'helpers/misc'
 import React from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import SignLine from 'assets/images/line.png'
-import { FormInput } from 'components/Form'
+import { FormInput, FormPassword } from 'components/Form'
 import { useFormik } from 'formik'
 
 const Authenticate = () => {
@@ -69,7 +69,63 @@ const Authenticate = () => {
               onChange={handleChange}
               setFieldTouched={setFieldTouched}
             />
+            <Box w='100%' mt={4}>
+              <FormPassword
+                {...{
+                  setFieldTouched,
+                  isRequired: true,
+                  name: 'password',
+                  label: 'Password',
+                  onBlur: handleBlur,
+                  value: values.password,
+                  error: errors.password,
+                  onChange: handleChange,
+                  placeholder: '********',
+                  touched: touched.password
+                }}
+              />
+            </Box>
           </Box>
+          <Flex my={5} align='center' justify='space-between'>
+            <Checkbox
+              fontSize={{ base: 'xs', md: 'sm' }}
+              size='sm'
+              colorScheme='cfButton'
+              onChange={() => {}}
+              borderColor='cfButton.500'
+            >
+              <Text
+                as='span'
+                fontFamily='Avenir'
+                fontStyle='normal'
+                color='#29325a'
+                fontSize={{ base: 'xs', md: 'sm' }}
+              >
+                Remember me
+              </Text>
+            </Checkbox>
+
+            <Box cursor='pointer' _focus={{ textDecor: 'none' }}>
+              <Text color='#677acb'>Forgot password ?</Text>
+            </Box>
+          </Flex>
+
+          <Button
+            title='Login'
+            borderRadius={{ ...rem(10) }}
+            w='100%'
+            mt={8}
+            fontSize='xl'
+            h={{ ...rem(50) }}
+          />
+          <Flex align='center' justify='center'>
+            <Text fontSize={{ base: 'xs', md: 'sm' }} mr={4}>
+              Not registered yet?
+            </Text>
+            <Box cursor='pointer' _focus={{ textDecor: 'none' }}>
+              <Text color='#677acb'>Create an Account</Text>
+            </Box>
+          </Flex>
         </FormCard>
       </Flex>
     </Flex>
