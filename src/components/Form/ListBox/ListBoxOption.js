@@ -12,8 +12,8 @@ const ListBoxOption = ({ item }) => (
         px={4}
         userSelect='none'
         cursor='pointer'
-        bg={active ? 'cf.400' : ''}
-        color={active ? 'white' : 'gray.700'}
+        bg={'white'}
+        color={active ? '#29325a' : 'gray.700'}
       >
         <Text isTruncated fontWeight={selected ? 'medium' : 'normal'}>
           {item?.name ?? item}
