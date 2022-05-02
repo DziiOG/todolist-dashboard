@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import {
   Box,
   Flex,
@@ -25,7 +26,7 @@ import React from 'react'
 import { BsPlus } from 'react-icons/bs'
 import { useQuery } from 'react-query'
 
-const FilterSelectors = () => (
+const FilterSelectors = ({ setSortValue, sortValue }) => (
   <Flex align='center'>
     <Select
       color='#29325A'
@@ -45,9 +46,63 @@ const FilterSelectors = () => (
       fontStyle='normal'
       fontWeight={900}
       placeholder='Sort by'
-    />
+      defaultValue={sortValue}
+      value={sortValue}
+      onChange={e => {
+        const value = e.target.value
+        setSortValue(value)
+      }}
+    >
+      {[
+        { name: 'First Added', id: 1 },
+        { name: 'Last Added', id: 1 }
+      ].map(item => (
+        <option key={item.id} value={item?.name}>
+          {item?.name}
+        </option>
+      ))}
+    </Select>
   </Flex>
 )
+
+FilterSelectors.propTypes = {
+  setSortValue: PropTypes.func,
+  sortValue: PropTypes.any
+}
+
+const TabTable = ({ defaultData }) => {
+  const [sortValue, setSortValue] = React.useState('First Added')
+  const [filterValue, setFilterValue] = React.useState('First Added')
+
+  return (
+    <Box w='100%'>
+      <TaskFilter
+        {...{
+          sortValue,
+          setFilterValue,
+          filterValue,
+          setSortValue
+        }}
+      />
+      <Table
+        columns={columns}
+        data={defaultData?.filter(item => {
+          const today = moment().format('MM/DD/YYYY')
+          const date = moment(item?.dueDate).format('MM/DD/YYYY')
+          return date === today
+        })}
+      />
+    </Box>
+  )
+}
+
+TabTable.propTypes = {
+  columns: PropTypes.any,
+  defaultData: PropTypes.shape({
+    filter: PropTypes.func
+  })
+}
+
 export const TaskFilter = () => (
   <Flex mb={{ ...rem(30) }} w='100%' justify='space-between' align='center'>
     <SearchInput w={{ ...rem(300) }} h={{ ...rem(44) }} />
@@ -72,8 +127,6 @@ const Tasks = () => {
       staleTime: 90000
     }
   )
-
-  console.log(data?.data, 'items')
 
   return (
     <Layout disableSearch page={2}>
@@ -190,16 +243,13 @@ const Tasks = () => {
             <TabPanels>
               <TabPanel>
                 <Box w='100%' h='100%' overflowY='scroll' position='relative'>
-                  <TaskFilter />
-                  <Table columns={columns} data={data?.data || []} />
+                  <TabTable defaultData={data?.data} />
                 </Box>
               </TabPanel>
               <TabPanel>
                 <Box w='100%' h='100%' overflowY='scroll' position='relative'>
-                  <TaskFilter />
-                  <Table
-                    columns={columns}
-                    data={data?.data?.filter(item => {
+                  <TabTable
+                    defaultData={data?.data?.filter(item => {
                       const today = moment().format('MM/DD/YYYY')
                       const date = moment(item?.dueDate).format('MM/DD/YYYY')
                       return date === today
@@ -209,10 +259,8 @@ const Tasks = () => {
               </TabPanel>
               <TabPanel>
                 <Box w='100%' h='100%' overflowY='scroll' position='relative'>
-                  <TaskFilter />
-                  <Table
-                    columns={columns}
-                    data={data?.data?.filter(item =>
+                  <TabTable
+                    defaultData={data?.data?.filter(item =>
                       moment(item.dueDate).isAfter()
                     )}
                   />
@@ -220,10 +268,8 @@ const Tasks = () => {
               </TabPanel>
               <TabPanel>
                 <Box w='100%' h='100%' overflowY='scroll' position='relative'>
-                  <TaskFilter />
-                  <Table
-                    columns={columns}
-                    data={data?.data?.filter(item =>
+                  <TabTable
+                    defaultData={data?.data?.filter(item =>
                       moment(item.dueDate).isBefore()
                     )}
                   />
