@@ -27,6 +27,7 @@ import { FormInput, FormSelect } from 'components/Form'
 import { useFormik } from 'formik'
 import { prs, statuses } from 'components/Modals/TaskModal'
 import { BiSearch } from 'react-icons/bi'
+import { GiCircle } from 'react-icons/gi'
 
 const FilterSelectors = ({ formik }) => {
   const { values, setFieldTouched, setFieldValue, errors } = formik
@@ -34,10 +35,10 @@ const FilterSelectors = ({ formik }) => {
     <Flex align='center'>
       <FormSelect
         options={[
-          { name: 'Name', id: 4 },
-          { name: 'Category', id: 1 },
-          { name: 'Priority', id: 2 },
-          { name: 'Status', id: 3 }
+          { icon: GiCircle, name: 'Name', id: 'Name' },
+          { icon: GiCircle, name: 'Category', id: 'Category' },
+          { icon: GiCircle, name: 'Priority', id: 'Priority' },
+          { icon: GiCircle, name: 'Status', id: 'Status' }
         ]}
         w={{ ...rem(142) }}
         h={{ ...rem(44) }}
@@ -59,8 +60,8 @@ const FilterSelectors = ({ formik }) => {
 
       <FormSelect
         options={[
-          { name: 'First Added', id: 1 },
-          { name: 'Last Added', id: 2 }
+          { name: 'First Added', id: 'First Added', icon: GiCircle },
+          { name: 'Last Added', id: 'Last Added', icon: GiCircle }
         ]}
         w={{ ...rem(142) }}
         h={{ ...rem(44) }}
@@ -104,8 +105,8 @@ const TabTable = ({ defaultData, categories }) => {
       category: '',
       priority: '',
       status: '',
-      sortValue: '',
-      filterValue: ''
+      sortValue: 'First Added',
+      filterValue: 'Name'
     }
   })
 
@@ -254,6 +255,7 @@ export const TaskFilter = ({ categories, formik }) => {
     )
   }
 
+  console.log(values.filterValue, 'filter')
   return (
     <Flex mb={{ ...rem(30) }} w='100%' justify='space-between' align='center'>
       {rendition[values?.filterValue]}

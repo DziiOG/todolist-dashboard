@@ -21,6 +21,7 @@ import CustomButton from 'components/Button'
 import { BsClock } from 'react-icons/bs'
 import useComponent from 'context/useComponent'
 import { frq } from 'components/Modals/TaskModal'
+import { FeatherRepeat } from 'theme/custom-icons'
 import CalendarDateItem from './CalendarDateItem'
 
 const PopCanContainer = ({
@@ -133,7 +134,7 @@ const PopCanContainer = ({
               </Box>
               <Box>
                 <Flex align='center'>
-                  <Icon mr={2} as={BsClock} />
+                  <Icon mr={2} as={FeatherRepeat} />
                   <Text textTransform='capitalize'>
                     {
                       frq.find(item => item.id === selectedEvent?.frequency)
