@@ -27,6 +27,7 @@ import { useQuery } from 'react-query'
 import { FormInput, FormSelect } from 'components/Form'
 import { useFormik } from 'formik'
 import { prs, statuses } from 'components/Modals/TaskModal'
+import { BiSearch } from 'react-icons/bi'
 
 const FilterSelectors = ({
   setSortValue,
@@ -195,9 +196,11 @@ export const TaskFilter = ({
   const rendition = {
     Name: (
       <FormInput
-        placeholder='Name your task'
+        placeholder='Search'
         id='name'
         name='name'
+        leftIcon={BiSearch}
+        borderRadius={{ ...rem(10) }}
         bg='#F2F5FF 0% 0% no-repeat padding-box'
         value={values.name}
         error={errors.name}
@@ -335,6 +338,26 @@ const Tasks = () => {
     }
   )
 
+  const selectedCssTab = {
+    fontSize: 'xl',
+    outline: 'none',
+    fontFamily: 'Avenir',
+    color: '#677acb',
+    fontWeight: 900,
+    borderBottomWidth: rem(5),
+    borderBottomColor: '#677acb'
+  }
+
+  const mainTabCss = {
+    _focus: { outline: 'none' },
+    _selected: selectedCssTab,
+    fontSize: { md: 'xl' },
+    fontWeight: 500,
+    fontFamily: 'Avenir',
+    color: '#29325A',
+    px: { md: 10 }
+  }
+
   return (
     <Layout disableSearch page={2}>
       <Spinner
@@ -357,85 +380,10 @@ const Tasks = () => {
         <Box w='100%' mt={{ ...rem(49) }}>
           <Tabs>
             <TabList fontWeight={700} fontSize='lg' color='#6E7575'>
-              <Tab
-                _focus={{ outline: 'none' }}
-                _selected={{
-                  fontSize: 'xl',
-                  outline: 'none',
-                  fontFamily: 'Avenir',
-                  color: '#677acb',
-                  fontWeight: 900,
-                  borderBottomWidth: rem(5),
-
-                  borderBottomColor: '#677acb'
-                }}
-                fontSize={{ md: 'xl' }}
-                fontWeight={500}
-                fontFamily='Avenir'
-                color='#29325A'
-                px={{ md: 10 }}
-              >
-                All
-              </Tab>
-              <Tab
-                _focus={{ outline: 'none' }}
-                _selected={{
-                  fontSize: 'xl',
-                  fontFamily: 'Avenir',
-                  outline: 'none',
-                  color: '#677acb',
-                  fontWeight: 900,
-                  borderBottomWidth: rem(5),
-
-                  borderBottomColor: '#677acb'
-                }}
-                fontSize={{ md: 'xl' }}
-                fontWeight={500}
-                px={{ md: 10 }}
-                fontFamily='Avenir'
-                color='#29325A'
-              >
-                Today
-              </Tab>
-              <Tab
-                _focus={{ outline: 'none' }}
-                px={{ md: 10 }}
-                _selected={{
-                  fontSize: 'xl',
-                  fontFamily: 'Avenir',
-                  outline: 'none',
-                  color: '#677acb',
-                  fontWeight: 900,
-                  borderBottomWidth: rem(5),
-
-                  borderBottomColor: '#677acb'
-                }}
-                fontWeight={500}
-                fontFamily='Avenir'
-                fontSize={{ md: 'xl' }}
-                color='#29325A'
-              >
-                Upcoming
-              </Tab>
-              <Tab
-                _focus={{ outline: 'none' }}
-                px={{ md: 10 }}
-                _selected={{
-                  fontSize: 'xl',
-                  fontFamily: 'Avenir',
-                  outline: 'none',
-                  color: '#677acb',
-                  fontWeight: 900,
-                  borderBottomWidth: rem(5),
-                  borderBottomColor: '#677acb'
-                }}
-                fontWeight={500}
-                fontSize={{ md: 'xl' }}
-                fontFamily='Avenir'
-                color='#29325A'
-              >
-                Past tasks
-              </Tab>
+              <Tab {...mainTabCss}>All</Tab>
+              <Tab {...mainTabCss}>Today</Tab>
+              <Tab {...mainTabCss}>Upcoming</Tab>
+              <Tab {...mainTabCss}>Past tasks</Tab>
               <Flex align='center' justify='right' w='59.5%'>
                 <Button
                   onClick={() => {
