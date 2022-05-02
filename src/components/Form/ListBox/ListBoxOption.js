@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, ListItem, Text } from '@chakra-ui/react'
+import { Box, Flex, Icon, ListItem, Text } from '@chakra-ui/react'
 import { Listbox } from '@headlessui/react'
 import PropTypes from 'prop-types'
 
@@ -12,12 +12,27 @@ const ListBoxOption = ({ item }) => (
         px={4}
         userSelect='none'
         cursor='pointer'
-        bg={'white'}
+        bg={active ? '#f2f5ff' : 'white'}
         color={active ? '#29325a' : 'gray.700'}
       >
-        <Text isTruncated fontWeight={selected ? 'medium' : 'normal'}>
-          {item?.name ?? item}
-        </Text>
+        <Flex w='100%' align='center'>
+          {item?.icon ? (
+            <Icon
+              as={item?.icon}
+              mr={3}
+              boxSize={6}
+              color={item?.iconColor || '#29325a'}
+            />
+          ) : null}
+          <Text
+            color={item?.textColor}
+            fontFamily={'Avenir'}
+            isTruncated
+            fontWeight={selected ? 'medium' : 'normal'}
+          >
+            {item?.name ?? item}
+          </Text>
+        </Flex>
       </Box>
     )}
   </Listbox.Option>
@@ -25,8 +40,11 @@ const ListBoxOption = ({ item }) => (
 
 ListBoxOption.propTypes = {
   item: PropTypes.shape({
+    icon: PropTypes.any,
+    iconColor: PropTypes.string,
     id: PropTypes.any,
-    name: PropTypes.string
+    name: PropTypes.string,
+    textColor: PropTypes.any
   })
 }
 

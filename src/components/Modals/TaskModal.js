@@ -29,11 +29,12 @@ export const frq = [
 export const prs = [
   {
     id: 1,
-    name: 'None'
+    name: 'None',
+    textColor: '#29325A'
   },
-  { id: 2, name: 'Low' },
-  { id: 3, name: 'Medium' },
-  { id: 4, name: 'High' }
+  { id: 2, name: 'Low', textColor: '#6fc9d9' },
+  { id: 3, name: 'Medium', textColor: '#cb9134' },
+  { id: 4, name: 'High', textColor: '#b93909' }
 ]
 
 export const statuses = [
