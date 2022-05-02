@@ -61,7 +61,7 @@ const Checker = ({ name, status, _id }) => {
             try {
               setLoading(true)
               await updateTask(_id, {
-                status: status === 'COMPLETED' ? 'COMPLETED' : 'PENDING'
+                status: check ? 'COMPLETED' : 'PENDING'
               })
               await queryClient.invalidateQueries([`tasks_user${user?._id}`])
 
