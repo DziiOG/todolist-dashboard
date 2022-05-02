@@ -32,12 +32,23 @@ export const ApiContextProvider = ({ children }) => {
       body: payload
     })
 
+  const updateCategory = async (id, payload) =>
+    await http.patch({
+      url: `${TODO_LIST_API}/categories/${id}`,
+      body: payload
+    })
+  const createCategory = async body =>
+    await http.post({ url: `${TODO_LIST_API}/categories`, body })
+
   const createTask = async body =>
     await http.post({ url: `${TODO_LIST_API}/tasks`, body })
+
   return (
     <ApiContext.Provider
       value={{
         login,
+        createCategory,
+        updateCategory,
         getTasks,
         updateTask,
         createTask,

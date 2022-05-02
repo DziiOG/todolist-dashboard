@@ -12,13 +12,16 @@ import {
   FormLabel,
   Grid,
   GridItem,
-  Text
+  Text,
+  useToast
 } from '@chakra-ui/react'
 import { FormInput } from 'components/Form'
-import { rem } from 'helpers/misc'
+import { rem, toastError, toastSuccess } from 'helpers/misc'
 import { isEmpty } from 'lodash'
 import useAuth from 'context/useAuth'
 import FormErrorHandler from 'components/Form/FormErrorHandler'
+import useApi from 'context/useApi'
+import { useQueryClient } from 'react-query'
 import ModalWrapper from './ModalWrapper'
 
 const ColorPickerForm = ({
@@ -121,7 +124,10 @@ ColorPickerForm.propTypes = {
 
 const CategoryModal = () => {
   const { isOpen, onClose, modalData } = useComponent()
-  const { isAuthenticated } = useAuth()
+  const queryClient = useQueryClient()
+  const { isAuthenticated, setSession } = useAuth()
+  const { updateCategory, createCategory } = useApi()
+  const toast = useToast()
   const { user } = isAuthenticated()
   const colors = [
     { color: '#E58D8D', id: 1 },
@@ -140,7 +146,34 @@ const CategoryModal = () => {
     },
     enableReinitialize: true,
     validationSchema: CategorySchema,
-    onSubmit: () => {}
+    onSubmit: async (
+      values,
+      { setSubmitting, setErrors, setStatus, resetForm }
+    ) => {
+      try {
+        setSubmitting(true)
+        const res = modalData
+          ? await updateCategory(modalData?._id, values)
+          : await createCategory(values)
+        await queryClient.invalidateQueries([`categories_user${user?._id}`])
+        toastSuccess(
+          modalData
+            ? 'Successfully updated category'
+            : 'Successfully created category',
+          res,
+          toast
+        )
+        resetForm({})
+        setStatus({ success: true })
+        onClose()
+      } catch (error) {
+        setStatus({ success: false })
+        toastError(error, toast, setSession)
+        setErrors({ submit: error?.data?.message })
+      } finally {
+        setSubmitting(false)
+      }
+    }
   })
 
   const {
@@ -182,20 +215,22 @@ const CategoryModal = () => {
               onChange={handleChange}
               setFieldTouched={setFieldTouched}
             />
-            <ColorPickerForm
-              label='Pick color'
-              required
-              id='color'
-              name='color'
-              h={{ ...rem(45) }}
-              value={values.color}
-              error={errors.color}
-              touched={touched.color}
-              onBlur={handleBlur}
-              setFieldValue={setFieldValue}
-              setFieldTouched={setFieldTouched}
-              colors={colors}
-            />
+            <Box mt={5} w='100%'>
+              <ColorPickerForm
+                label='Pick color'
+                required
+                id='color'
+                name='color'
+                h={{ ...rem(45) }}
+                value={values.color}
+                error={errors.color}
+                touched={touched.color}
+                onBlur={handleBlur}
+                setFieldValue={setFieldValue}
+                setFieldTouched={setFieldTouched}
+                colors={colors}
+              />
+            </Box>
           </GridItem>
         </Grid>
         <CustomButton
