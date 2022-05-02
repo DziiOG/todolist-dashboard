@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types'
 import React from 'react'
-import { Box, Checkbox, Flex, Icon, Text } from '@chakra-ui/react'
-import { rem } from 'helpers/misc'
+import { Box, Flex, Icon, Text, useToast } from '@chakra-ui/react'
+import { rem, toastError } from 'helpers/misc'
 import { FiChevronRight } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
 import Table from 'components/Table'
@@ -8,7 +9,7 @@ import { AiOutlineCheck } from 'react-icons/ai'
 import TableAction from 'components/Table/TableAction'
 import moment from 'moment'
 import Spinner from 'components/FetchCard/Spinner'
-import { useQuery } from 'react-query'
+import { useQuery, useQueryClient } from 'react-query'
 import useApi from 'context/useApi'
 import useAuth from 'context/useAuth'
 
@@ -25,18 +26,73 @@ const colors = [
   { color: '#8A904833', id: 'RESCHEDULED' }
 ]
 
+const Checker = ({ name, status, _id }) => {
+  const [check, setCheck] = React.useState(status === 'COMPLETED')
+  const queryClient = useQueryClient()
+  const { setSession, isAuthenticated } = useAuth()
+  const { user } = isAuthenticated()
+  const { updateTask } = useApi()
+  const [loading, setLoading] = React.useState(false)
+
+  React.useEffect(() => {
+    if (status === 'COMPLETED') {
+      setCheck(status === 'COMPLETED')
+    }
+  }, [status])
+  const toast = useToast()
+
+  return (
+    <Flex align='center'>
+      <Spinner
+        w='100%'
+        h='4'
+        hook={{
+          loading,
+          error: null
+        }}
+      >
+        <Flex
+          as='button'
+          align='center'
+          justify='center'
+          w={{ ...rem(15) }}
+          h={{ ...rem(15) }}
+          onClick={async () => {
+            try {
+              setLoading(true)
+              await updateTask(_id, {
+                status: status === 'COMPLETED' ? 'COMPLETED' : 'PENDING'
+              })
+              await queryClient.invalidateQueries([`tasks_user${user?._id}`])
+
+              setCheck(!check)
+            } catch (error) {
+              toastError(error, toast, setSession)
+            } finally {
+              setLoading(false)
+            }
+          }}
+          borderWidth='1px'
+          borderColor='#29325A'
+        >
+          {check && <Icon as={AiOutlineCheck} />}
+        </Flex>
+        <Text ml={2}>{name}</Text>
+      </Spinner>
+    </Flex>
+  )
+}
+
+Checker.propTypes = {
+  _id: PropTypes.any,
+  name: PropTypes.any,
+  status: PropTypes.string
+}
 export const columns = [
   {
     name: 'Task name',
     selector: row => (
-      <Flex>
-        <Checkbox
-          icon={<Icon color='black' as={AiOutlineCheck} />}
-          colorScheme='green'
-        >
-          <Text ml={2}>{row?.name}</Text>
-        </Checkbox>
-      </Flex>
+      <Checker _id={row?._id} name={row?.name} status={row?.status} />
     )
   },
   {
