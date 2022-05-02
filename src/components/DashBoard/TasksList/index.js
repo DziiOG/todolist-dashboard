@@ -64,7 +64,6 @@ const Checker = ({ name, status, _id }) => {
                 status: check ? 'COMPLETED' : 'PENDING'
               })
               await queryClient.invalidateQueries([`tasks_user${user?._id}`])
-
               setCheck(!check)
             } catch (error) {
               toastError(error, toast, setSession)
