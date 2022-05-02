@@ -49,7 +49,6 @@ export const toastSuccess = (title, res, toast) => {
     title,
     isClosable: true,
     description: res.message,
-    status: 'success',
     duration: 5000,
     position: 'top-right'
   })
