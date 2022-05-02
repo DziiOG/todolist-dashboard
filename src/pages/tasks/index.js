@@ -74,6 +74,11 @@ const TabTable = ({ defaultData }) => {
   const [sortValue, setSortValue] = React.useState('First Added')
   const [filterValue, setFilterValue] = React.useState('First Added')
 
+  const sortItems =
+    sortValue === 'First Added'
+      ? (a, b) => new Date(a) - new Date(b)
+      : (a, b) => new Date(b) - new Date(a)
+
   return (
     <Box w='100%'>
       <TaskFilter
@@ -86,7 +91,7 @@ const TabTable = ({ defaultData }) => {
       />
       <Table
         columns={columns}
-        data={defaultData?.filter(item => {
+        data={defaultData?.sort(sortItems).filter(item => {
           const today = moment().format('MM/DD/YYYY')
           const date = moment(item?.dueDate).format('MM/DD/YYYY')
           return date === today
@@ -98,9 +103,7 @@ const TabTable = ({ defaultData }) => {
 
 TabTable.propTypes = {
   columns: PropTypes.any,
-  defaultData: PropTypes.shape({
-    filter: PropTypes.func
-  })
+  defaultData: PropTypes.any
 }
 
 export const TaskFilter = () => (
