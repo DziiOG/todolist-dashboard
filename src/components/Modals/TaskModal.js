@@ -12,6 +12,7 @@ import useAuth from 'context/useAuth'
 import useApi from 'context/useApi'
 import { useQuery, useQueryClient } from 'react-query'
 import Spinner from 'components/FetchCard/Spinner'
+import { FaCircle } from 'react-icons/fa'
 import ModalWrapper from './ModalWrapper'
 
 export const frq = [
@@ -174,8 +175,16 @@ const TaskModal = () => {
             </GridItem>
             <GridItem>
               <FormSelect
+                iconColor={
+                  data?.data?.find(item => item._id === values.category)?.color
+                }
                 required
                 label='Category'
+                leftIcon={
+                  data?.data?.find(item => item._id === values.category)?.color
+                    ? FaCircle
+                    : undefined
+                }
                 placeholder='Select category'
                 id='category'
                 name='category'

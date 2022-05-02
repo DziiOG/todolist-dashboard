@@ -22,6 +22,7 @@ const FormSelect = ({
   value,
   helper,
   touched,
+  iconColor,
   options,
   required,
   placeholder,
@@ -79,6 +80,7 @@ const FormSelect = ({
         <Box mt={1} pos='relative'>
           <ListBoxButton
             leftIcon={leftIcon}
+            iconColor={iconColor}
             selected={
               typeof options[0] !== 'string'
                 ? options?.find(e => e.id === value)?.name
@@ -119,6 +121,7 @@ FormSelect.propTypes = {
   fontWeight: PropTypes.number,
   hasSpan: PropTypes.any,
   helper: PropTypes.string,
+  iconColor: PropTypes.any,
   id: PropTypes.any,
   label: PropTypes.string,
   leftIcon: PropTypes.any,

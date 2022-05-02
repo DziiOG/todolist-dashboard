@@ -4,7 +4,14 @@ import { FiChevronDown } from 'react-icons/fi'
 import { Listbox } from '@headlessui/react'
 import PropTypes from 'prop-types'
 
-const ListBoxButton = ({ selected, placeholder, bg, leftIcon, ...rest }) => (
+const ListBoxButton = ({
+  selected,
+  placeholder,
+  bg,
+  leftIcon,
+  iconColor,
+  ...rest
+}) => (
   <Listbox.Button
     py={2}
     pl={5}
@@ -31,18 +38,37 @@ const ListBoxButton = ({ selected, placeholder, bg, leftIcon, ...rest }) => (
         pl={2}
         pointerEvents='none'
       >
-        <Icon as={leftIcon} boxSize={6} color='#29325a' />
+        <Icon as={leftIcon} boxSize={6} color={iconColor || '#29325a'} />
       </Flex>
     )}
-    <Text ml={leftIcon ? 5 : 0} as='span' isTruncated fontSize='sm'>
-      {selected ? (
-        selected?.name || selected
-      ) : (
-        <Text color='gray.300' fontSize={{ base: 'sm', '5xl': 'md' }}>
-          {placeholder}
-        </Text>
-      )}
-    </Text>
+    <Flex align='center' w='100%'>
+      {selected?.icon ? (
+        <Icon
+          as={selected?.icon}
+          mr={3}
+          boxSize={6}
+          color={selected?.iconColor || '#29325a'}
+        />
+      ) : null}
+      <Text
+        ml={leftIcon ? 5 : 0}
+        as='span'
+        color={selected?.textColor}
+        isTruncated
+        fontSize='sm'
+      >
+        {selected ? (
+          selected?.name || selected
+        ) : (
+          <Text
+            color={selected?.textColor}
+            fontSize={{ base: 'sm', '5xl': 'md' }}
+          >
+            {placeholder}
+          </Text>
+        )}
+      </Text>
+    </Flex>
     <Flex
       align='center'
       pos='absolute'
@@ -59,10 +85,14 @@ const ListBoxButton = ({ selected, placeholder, bg, leftIcon, ...rest }) => (
 
 ListBoxButton.propTypes = {
   bg: PropTypes.any,
+  iconColor: PropTypes.string,
   leftIcon: PropTypes.any,
   placeholder: PropTypes.any,
   selected: PropTypes.shape({
-    name: PropTypes.string
+    icon: PropTypes.any,
+    iconColor: PropTypes.string,
+    name: PropTypes.string,
+    textColor: PropTypes.any
   })
 }
 
