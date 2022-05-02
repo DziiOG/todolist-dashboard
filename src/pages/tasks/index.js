@@ -4,7 +4,6 @@ import {
   Flex,
   Heading,
   Icon,
-  Select,
   Tab,
   TabList,
   TabPanel,
@@ -29,83 +28,84 @@ import { useFormik } from 'formik'
 import { prs, statuses } from 'components/Modals/TaskModal'
 import { BiSearch } from 'react-icons/bi'
 
-const FilterSelectors = ({
-  setSortValue,
-  sortValue,
-  setFilterValue,
-  filterValue
-}) => (
-  <Flex align='center'>
-    <Select
-      color='#29325A'
-      fontFamily='Avenir'
-      fontStyle='normal'
-      fontWeight={900}
-      w={{ ...rem(142) }}
-      h={{ ...rem(44) }}
-      placeholder='Filter by'
-      mr={{ md: 5 }}
-      defaultValue={filterValue}
-      value={filterValue}
-      onChange={e => {
-        const value = e.target.value
-        setFilterValue(value)
-      }}
-    >
-      {[
-        { name: 'Name', id: 4 },
-        { name: 'Category', id: 1 },
-        { name: 'Priority', id: 2 },
-        { name: 'Status', id: 3 }
-      ].map(item => (
-        <option key={item.id} value={item?.name}>
-          {item?.name}
-        </option>
-      ))}
-    </Select>
-    <Select
-      w={{ ...rem(142) }}
-      h={{ ...rem(44) }}
-      color='#29325A'
-      fontFamily='Avenir'
-      fontStyle='normal'
-      fontWeight={900}
-      placeholder='Sort by'
-      defaultValue={sortValue}
-      value={sortValue}
-      onChange={e => {
-        const value = e.target.value
-        setSortValue(value)
-      }}
-    >
-      {[
-        { name: 'First Added', id: 1 },
-        { name: 'Last Added', id: 2 }
-      ].map(item => (
-        <option key={item.id} value={item?.name}>
-          {item?.name}
-        </option>
-      ))}
-    </Select>
-  </Flex>
-)
+const FilterSelectors = ({ formik }) => {
+  const { values, setFieldTouched, setFieldValue, errors } = formik
+  return (
+    <Flex align='center'>
+      <FormSelect
+        options={[
+          { name: 'Name', id: 4 },
+          { name: 'Category', id: 1 },
+          { name: 'Priority', id: 2 },
+          { name: 'Status', id: 3 }
+        ]}
+        w={{ ...rem(142) }}
+        h={{ ...rem(44) }}
+        color='#29325A'
+        fontFamily='Avenir'
+        fontStyle='normal'
+        fontWeight={900}
+        placeholder='FIlter by'
+        id='filterValue'
+        name='filterValue'
+        value={values?.filterValue}
+        error={errors?.filterValue}
+        setFieldValue={(id, e) => {
+          setFieldValue(id, e)
+        }}
+        setFieldTouched={setFieldTouched}
+        mr={{ md: 5 }}
+      />
+
+      <FormSelect
+        options={[
+          { name: 'First Added', id: 1 },
+          { name: 'Last Added', id: 2 }
+        ]}
+        w={{ ...rem(142) }}
+        h={{ ...rem(44) }}
+        color='#29325A'
+        fontFamily='Avenir'
+        fontStyle='normal'
+        fontWeight={900}
+        placeholder='Sort by'
+        id='sortValue'
+        name='sortValue'
+        value={values?.sortValue}
+        error={errors?.sortValue}
+        setFieldValue={(id, e) => {
+          setFieldValue(id, e)
+        }}
+        setFieldTouched={setFieldTouched}
+      />
+    </Flex>
+  )
+}
 
 FilterSelectors.propTypes = {
-  filterValue: PropTypes.any,
-  setFilterValue: PropTypes.func,
-  setSortValue: PropTypes.func,
-  sortValue: PropTypes.any
+  formik: PropTypes.shape({
+    errors: PropTypes.shape({
+      filterValue: PropTypes.any,
+      sortValue: PropTypes.any
+    }),
+    setFieldTouched: PropTypes.any,
+    setFieldValue: PropTypes.func,
+    values: PropTypes.shape({
+      filterValue: PropTypes.any,
+      sortValue: PropTypes.any
+    })
+  })
 }
 
 const TabTable = ({ defaultData, categories }) => {
-  const [sortValue, setSortValue] = React.useState('First Added')
-  const [filterValue, setFilterValue] = React.useState('Name')
   const formik = useFormik({
     initialValues: {
       name: '',
       category: '',
       priority: '',
-      status: ''
+      status: '',
+      sortValue: '',
+      filterValue: ''
     }
   })
 
@@ -115,10 +115,6 @@ const TabTable = ({ defaultData, categories }) => {
     <Box w='100%'>
       <TaskFilter
         {...{
-          sortValue,
-          setFilterValue,
-          filterValue,
-          setSortValue,
           formik,
           categories
         }}
@@ -131,7 +127,7 @@ const TabTable = ({ defaultData, categories }) => {
               'First Added': new Date(a?.createdAt) - new Date(b?.createdAt),
               'Last Added': new Date(b?.createdAt) - new Date(a?.createdAt)
             }
-            return sortDecision[sortValue]
+            return sortDecision[values.sortValue]
           })
           .filter(item => {
             const filterDecision = {
@@ -166,7 +162,8 @@ const TabTable = ({ defaultData, categories }) => {
                 return true
               }
             }
-            return filterDecision[filterValue]()
+            const func = filterDecision[values?.filterValue]
+            return func ? func() : true
           })}
       />
     </Box>
@@ -181,14 +178,7 @@ TabTable.propTypes = {
   })
 }
 
-export const TaskFilter = ({
-  setSortValue,
-  sortValue,
-  setFilterValue,
-  filterValue,
-  categories,
-  formik
-}) => {
+export const TaskFilter = ({ categories, formik }) => {
   const { values, errors, setFieldValue, setFieldTouched, handleChange } =
     formik
   const rendition = {
@@ -266,10 +256,8 @@ export const TaskFilter = ({
 
   return (
     <Flex mb={{ ...rem(30) }} w='100%' justify='space-between' align='center'>
-      {rendition[filterValue]}
-      <FilterSelectors
-        {...{ setSortValue, sortValue, setFilterValue, filterValue }}
-      />
+      {rendition[values?.filterValue]}
+      <FilterSelectors {...{ formik }} />
     </Flex>
   )
 }
@@ -291,6 +279,7 @@ TaskFilter.propTypes = {
     setFieldValue: PropTypes.func,
     values: PropTypes.shape({
       category: PropTypes.any,
+      filterValue: PropTypes.any,
       name: PropTypes.any,
       priority: PropTypes.any,
       status: PropTypes.any

@@ -104,7 +104,6 @@ const TaskModal = () => {
       staleTime: 90000
     }
   )
-
   const {
     values,
     errors,
