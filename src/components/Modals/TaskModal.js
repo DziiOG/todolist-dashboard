@@ -13,6 +13,7 @@ import useApi from 'context/useApi'
 import { useQuery, useQueryClient } from 'react-query'
 import Spinner from 'components/FetchCard/Spinner'
 import { FaCircle } from 'react-icons/fa'
+import moment from 'moment'
 import ModalWrapper from './ModalWrapper'
 
 export const frq = [
@@ -57,9 +58,10 @@ const TaskModal = () => {
       category: modalData?.category ? modalData.category._id : '',
       name: modalData?.name || '',
       dueDate: modalData?.dueDate || '',
-      priority: modalData?.priority || '',
+      priority: modalData?.priority || prs[0].id,
       frequency: modalData?.frequency || '',
-      description: modalData?.description || ''
+      description: modalData?.description || '',
+      status: modalData?.status || statuses[0].id
     },
     enableReinitialize: true,
     validationSchema: TaskSchema,
@@ -115,6 +117,7 @@ const TaskModal = () => {
     dirty,
     isSubmitting
   } = formik
+
   return (
     <ModalWrapper
       title={modalData ? 'Edit Task' : 'Add Task'}
@@ -166,7 +169,10 @@ const TaskModal = () => {
                 h={{ ...rem(45) }}
                 leftIcon={CalendarFeather}
                 placeholder='Select date and time'
-                value={values.dueDate}
+                value={moment
+                  .utc(values.dueDate)
+                  .format('YYYY-MM-DD HH:mm')
+                  .replace(' ', 'T')}
                 error={errors.dueDate}
                 touched={touched.dueDate}
                 onBlur={handleBlur}
@@ -249,7 +255,6 @@ const TaskModal = () => {
               <Grid gap={5} w='100%' templateColumns='repeat(1,1fr)'>
                 <GridItem>
                   <FormSelect
-                    required
                     leftIcon={Priority}
                     label='Priority'
                     hasSpan
@@ -270,7 +275,6 @@ const TaskModal = () => {
                 </GridItem>
                 <GridItem>
                   <FormSelect
-                    required
                     leftIcon={FeatherRepeat}
                     label='Status'
                     placeholder='Select task status'
