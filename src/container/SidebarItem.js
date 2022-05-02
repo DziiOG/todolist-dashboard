@@ -6,9 +6,10 @@ import { rem } from 'helpers/misc'
 
 const MotionFlex = motion(Flex)
 
-const SidebarItem = ({ icon, title, selected, step, id, page }) => (
+const SidebarItem = ({ icon, title, selected, step, id, page, ...rest }) => (
   <MotionFlex
     my={{ md: 4 }}
+    {...rest}
     pacing='0.2rem'
     borderRadius={{ ...rem(10) }}
     px={{ md: 4 }}

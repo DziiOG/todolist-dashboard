@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box, Flex, Link, Stack } from '@chakra-ui/react'
+import { Box, Flex, Link, Stack, useToast } from '@chakra-ui/react'
 
 import SidebarItem from 'container/SidebarItem'
 import { Link as ReachRouter, useLocation } from 'react-router-dom'
@@ -9,9 +9,13 @@ import { RiLogoutBoxLine, RiDashboardLine } from 'react-icons/ri'
 import { IoMdCalendar } from 'react-icons/io'
 import { FiSettings } from 'react-icons/fi'
 import { HelpOutline, MultipleOutline } from 'theme/custom-icons'
+import { toastError } from 'helpers/misc'
+import useAuth from 'context/useAuth'
 
 const Sidebar = ({ page }) => {
   const { pathname } = useLocation()
+  const { setSession, logout } = useAuth()
+  const toast = useToast()
 
   const menuLinks = [
     { id: 1, icon: RiDashboardLine, link: `/dashboard`, name: 'Dashboard' },
@@ -79,7 +83,18 @@ const Sidebar = ({ page }) => {
                 </Box>
               ))}
             </Box>
-            <SidebarItem icon={RiLogoutBoxLine} page={6} title={'Logout'} />
+            <SidebarItem
+              onClick={async () => {
+                try {
+                  await logout()
+                } catch (error) {
+                  toastError(error, toast, setSession)
+                }
+              }}
+              icon={RiLogoutBoxLine}
+              page={6}
+              title={'Logout'}
+            />
           </Flex>
         </Stack>
       </AnimateSharedLayout>
