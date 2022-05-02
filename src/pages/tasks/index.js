@@ -25,6 +25,9 @@ import moment from 'moment'
 import React from 'react'
 import { BsPlus } from 'react-icons/bs'
 import { useQuery } from 'react-query'
+import { FormSelect } from 'components/Form'
+import { useFormik } from 'formik'
+import { prs, statuses } from 'components/Modals/TaskModal'
 
 const FilterSelectors = ({
   setSortValue,
@@ -50,9 +53,10 @@ const FilterSelectors = ({
       }}
     >
       {[
+        { name: 'Name', id: 4 },
         { name: 'Category', id: 1 },
         { name: 'Priority', id: 2 },
-        { name: 'Status', id: 2 }
+        { name: 'Status', id: 3 }
       ].map(item => (
         <option key={item.id} value={item?.name}>
           {item?.name}
@@ -93,14 +97,18 @@ FilterSelectors.propTypes = {
   sortValue: PropTypes.any
 }
 
-const TabTable = ({ defaultData }) => {
+const TabTable = ({ defaultData, categories }) => {
   const [sortValue, setSortValue] = React.useState('First Added')
-  const [filterValue, setFilterValue] = React.useState('First Added')
+  const [filterValue, setFilterValue] = React.useState('Name')
+  const formik = useFormik({
+    initialValues: {
+      category: '',
+      priority: '',
+      status: ''
+    }
+  })
 
-  const sortItems =
-    sortValue === 'First Added'
-      ? (a, b) => new Date(a) - new Date(b)
-      : (a, b) => new Date(b) - new Date(a)
+  console.log(sortValue, 'changinf')
 
   return (
     <Box w='100%'>
@@ -109,15 +117,20 @@ const TabTable = ({ defaultData }) => {
           sortValue,
           setFilterValue,
           filterValue,
-          setSortValue
+          setSortValue,
+          formik,
+          categories
         }}
       />
       <Table
         columns={columns}
-        data={defaultData?.sort(sortItems).filter(item => {
-          const today = moment().format('MM/DD/YYYY')
-          const date = moment(item?.dueDate).format('MM/DD/YYYY')
-          return date === today
+        data={defaultData?.sort((a, b) => {
+          const sortDecision = {
+            'First Added': new Date(a?.createdAt) - new Date(b?.createdAt),
+            'Last Added': new Date(b?.createdAt) - new Date(a?.createdAt)
+          }
+          console.log(sortDecision[sortValue])
+          return sortDecision[sortValue]
         })}
       />
     </Box>
@@ -125,21 +138,115 @@ const TabTable = ({ defaultData }) => {
 }
 
 TabTable.propTypes = {
+  categories: PropTypes.any,
   columns: PropTypes.any,
-  defaultData: PropTypes.any
+  defaultData: PropTypes.shape({
+    sort: PropTypes.func
+  })
 }
 
-export const TaskFilter = () => (
-  <Flex mb={{ ...rem(30) }} w='100%' justify='space-between' align='center'>
-    <SearchInput w={{ ...rem(300) }} h={{ ...rem(44) }} />
-    <FilterSelectors />
-  </Flex>
-)
+export const TaskFilter = ({
+  setSortValue,
+  sortValue,
+  setFilterValue,
+  filterValue,
+  categories,
+  formik
+}) => {
+  const { values, errors, setFieldValue, setFieldTouched } = formik
+  const rendition = {
+    Name: <SearchInput w={{ ...rem(300) }} h={{ ...rem(44) }} />,
+    Category: (
+      <FormSelect
+        w={{ ...rem(300) }}
+        placeholder='Select category'
+        id='category'
+        name='category'
+        options={categories?.map(item => ({
+          name: item.name,
+          id: item?._id
+        }))}
+        h={{ ...rem(44) }}
+        value={values?.category}
+        error={errors?.category}
+        setFieldValue={(id, e) => {
+          setFieldValue(id, e)
+        }}
+        setFieldTouched={setFieldTouched}
+      />
+    ),
+    Priority: (
+      <FormSelect
+        w={{ ...rem(300) }}
+        h={{ ...rem(44) }}
+        placeholder='Select priority'
+        id='priority'
+        name='priority'
+        options={prs}
+        value={values?.priority}
+        error={errors?.priority}
+        setFieldValue={(id, e) => {
+          setFieldValue(id, e)
+        }}
+        setFieldTouched={setFieldTouched}
+      />
+    ),
+    Status: (
+      <FormSelect
+        w={{ ...rem(300) }}
+        h={{ ...rem(44) }}
+        placeholder='Select status'
+        id='status'
+        name='status'
+        options={statuses}
+        value={values?.status}
+        error={errors?.status}
+        setFieldValue={(id, e) => {
+          setFieldValue(id, e)
+        }}
+        setFieldTouched={setFieldTouched}
+      />
+    )
+  }
+
+  return (
+    <Flex mb={{ ...rem(30) }} w='100%' justify='space-between' align='center'>
+      {rendition[filterValue]}
+      <FilterSelectors
+        {...{ setSortValue, sortValue, setFilterValue, filterValue }}
+      />
+    </Flex>
+  )
+}
+
+TaskFilter.propTypes = {
+  categories: PropTypes.shape({
+    map: PropTypes.func
+  }),
+  filterValue: PropTypes.any,
+  formik: PropTypes.shape({
+    errors: PropTypes.shape({
+      category: PropTypes.any,
+      priority: PropTypes.any,
+      status: PropTypes.any
+    }),
+    setFieldTouched: PropTypes.any,
+    setFieldValue: PropTypes.func,
+    values: PropTypes.shape({
+      category: PropTypes.any,
+      priority: PropTypes.any,
+      status: PropTypes.any
+    })
+  }),
+  setFilterValue: PropTypes.any,
+  setSortValue: PropTypes.any,
+  sortValue: PropTypes.any
+}
 
 const Tasks = () => {
   const { handleModalClick } = useComponent()
 
-  const { getTasks } = useApi()
+  const { getTasks, getCategories } = useApi()
   const { isAuthenticated } = useAuth()
   const { user } = isAuthenticated()
   const { data, isLoading, error, refetch } = useQuery(
@@ -154,15 +261,35 @@ const Tasks = () => {
     }
   )
 
+  const {
+    data: categories,
+    isLoading: categoriesIsLoading,
+    error: categoriesHasError,
+    refetch: categoriesRefetch
+  } = useQuery(
+    [`categories_user${user?._id}`],
+    async () => {
+      if (user?._id) {
+        return await getCategories({ user: user?._id })
+      }
+    },
+    {
+      staleTime: 90000
+    }
+  )
+
   return (
     <Layout disableSearch page={2}>
       <Spinner
         w='100%'
         h='100vh'
         hook={{
-          loading: isLoading,
-          error,
-          triggerReload: () => refetch()
+          loading: isLoading || categoriesIsLoading,
+          error: error || categoriesHasError,
+          triggerReload: () => {
+            error && refetch()
+            categoriesHasError && categoriesRefetch()
+          }
         }}
       >
         <Box w='100%'>
@@ -269,12 +396,16 @@ const Tasks = () => {
             <TabPanels>
               <TabPanel>
                 <Box w='100%' h='100%' overflowY='scroll' position='relative'>
-                  <TabTable defaultData={data?.data} />
+                  <TabTable
+                    categories={categories?.data || []}
+                    defaultData={data?.data}
+                  />
                 </Box>
               </TabPanel>
               <TabPanel>
                 <Box w='100%' h='100%' overflowY='scroll' position='relative'>
                   <TabTable
+                    categories={categories?.data || []}
                     defaultData={data?.data?.filter(item => {
                       const today = moment().format('MM/DD/YYYY')
                       const date = moment(item?.dueDate).format('MM/DD/YYYY')
@@ -286,6 +417,7 @@ const Tasks = () => {
               <TabPanel>
                 <Box w='100%' h='100%' overflowY='scroll' position='relative'>
                   <TabTable
+                    categories={categories?.data || []}
                     defaultData={data?.data?.filter(item =>
                       moment(item.dueDate).isAfter()
                     )}
@@ -295,6 +427,7 @@ const Tasks = () => {
               <TabPanel>
                 <Box w='100%' h='100%' overflowY='scroll' position='relative'>
                   <TabTable
+                    categories={categories?.data || []}
                     defaultData={data?.data?.filter(item =>
                       moment(item.dueDate).isBefore()
                     )}

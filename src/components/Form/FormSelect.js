@@ -91,7 +91,7 @@ const FormSelect = ({
             _focus={focusState}
             {...rest}
           />
-          <ListBoxOptions options={options} selector={selector} />
+          <ListBoxOptions options={options} w={rest.w} selector={selector} />
         </Box>
       </Listbox>
       <FormErrorHandler

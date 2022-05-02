@@ -8,7 +8,7 @@ import ListBoxOption from './ListBoxOption'
 const MotionList = motion(UnorderedList)
 const transition = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] }
 
-const ListBoxOptions = ({ options }) => (
+const ListBoxOptions = ({ options, w }) => (
   <Listbox.Options
     as={MotionList}
     listStyleType='none'
@@ -17,7 +17,7 @@ const ListBoxOptions = ({ options }) => (
     exit={{ opacity: 0, transition: { ...transition } }}
     ml={0}
     pos='absolute'
-    w='full'
+    w={w || 'full'}
     py={1}
     mt={1}
     overflow='auto'
@@ -36,7 +36,8 @@ const ListBoxOptions = ({ options }) => (
 )
 
 ListBoxOptions.propTypes = {
-  options: PropTypes.array
+  options: PropTypes.array,
+  w: PropTypes.string
 }
 
 export default ListBoxOptions
