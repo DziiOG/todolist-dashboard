@@ -49,10 +49,10 @@ export const columns = [
       <Flex
         justify='center'
         align='center'
-        color={`${row?.category?.color}33`}
+        bg={`${row?.category?.color}33`}
         borderRadius={{ ...rem(10) }}
         p={3}
-        bg={row.category.color}
+        color={'#29325A'}
       >
         {row.category.name}
       </Flex>
@@ -72,10 +72,10 @@ export const columns = [
       <Flex
         justify='center'
         align='center'
-        color={colors?.find(item => item?.id === row?.status)?.color}
-        borderRadius={{ ...rem(10) }}
+        bg={colors?.find(item => item?.id === row?.status)?.color}
+        borderRadius={{ ...rem(15) }}
         p={3}
-        bg={row.category.color}
+        color={'#29325A'}
       >
         <Text textTransform='capitalize'>
           {row?.status?.replace('_', ' ')?.toLowerCase()}
