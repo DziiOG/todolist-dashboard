@@ -73,6 +73,34 @@ const TaskModal = () => {
     }
   )
 
+  const frq = [
+    {
+      id: 'never',
+      name: 'never repeats'
+    },
+    { id: 'daily', name: 'repeats daily' },
+    { id: 'weekly', name: 'repeats weekly' },
+    { id: 'monthly', name: 'repeats monthly' },
+    { id: 'customize', name: 'customize' }
+  ]
+
+  const prs = [
+    {
+      id: 1,
+      name: 'None'
+    },
+    { id: 2, name: 'Low' },
+    { id: 3, name: 'Medium' },
+    { id: 4, name: 'High' }
+  ]
+
+  const statuses = [
+    { id: 'PENDING', name: 'Pending' },
+    { id: 'IN_PROGRESS', name: 'In progress' },
+    { id: 'COMPLETED', name: 'Completed' },
+    { id: 'RESCHEDULED', name: 'Rescheduled' }
+  ]
+
   const {
     values,
     errors,
@@ -173,7 +201,7 @@ const TaskModal = () => {
                 placeholder='Select task frequency'
                 id='frequency'
                 name='frequency'
-                options={[]}
+                options={frq}
                 h={{ ...rem(45) }}
                 value={values.frequency}
                 error={errors.frequency}
@@ -219,7 +247,7 @@ const TaskModal = () => {
                     placeholder='Select priority'
                     id='priority'
                     name='priority'
-                    options={[]}
+                    options={prs}
                     h={{ ...rem(45) }}
                     value={values.priority}
                     error={errors.priority}
@@ -238,7 +266,7 @@ const TaskModal = () => {
                     placeholder='Select task status'
                     id='status'
                     name='status'
-                    options={[]}
+                    options={statuses}
                     h={{ ...rem(45) }}
                     value={values.status}
                     error={errors.status}
