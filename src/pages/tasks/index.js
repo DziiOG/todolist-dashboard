@@ -26,7 +26,12 @@ import React from 'react'
 import { BsPlus } from 'react-icons/bs'
 import { useQuery } from 'react-query'
 
-const FilterSelectors = ({ setSortValue, sortValue }) => (
+const FilterSelectors = ({
+  setSortValue,
+  sortValue,
+  setFilterValue,
+  filterValue
+}) => (
   <Flex align='center'>
     <Select
       color='#29325A'
@@ -37,7 +42,23 @@ const FilterSelectors = ({ setSortValue, sortValue }) => (
       h={{ ...rem(44) }}
       placeholder='Filter by'
       mr={{ md: 5 }}
-    />
+      defaultValue={filterValue}
+      value={filterValue}
+      onChange={e => {
+        const value = e.target.value
+        setFilterValue(value)
+      }}
+    >
+      {[
+        { name: 'Category', id: 1 },
+        { name: 'Priority', id: 2 },
+        { name: 'Status', id: 2 }
+      ].map(item => (
+        <option key={item.id} value={item?.name}>
+          {item?.name}
+        </option>
+      ))}
+    </Select>
     <Select
       w={{ ...rem(142) }}
       h={{ ...rem(44) }}
@@ -55,7 +76,7 @@ const FilterSelectors = ({ setSortValue, sortValue }) => (
     >
       {[
         { name: 'First Added', id: 1 },
-        { name: 'Last Added', id: 1 }
+        { name: 'Last Added', id: 2 }
       ].map(item => (
         <option key={item.id} value={item?.name}>
           {item?.name}
@@ -66,6 +87,8 @@ const FilterSelectors = ({ setSortValue, sortValue }) => (
 )
 
 FilterSelectors.propTypes = {
+  filterValue: PropTypes.any,
+  setFilterValue: PropTypes.func,
   setSortValue: PropTypes.func,
   sortValue: PropTypes.any
 }
