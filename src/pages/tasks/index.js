@@ -255,7 +255,6 @@ export const TaskFilter = ({ categories, formik }) => {
     )
   }
 
-  console.log(values.filterValue, 'filter')
   return (
     <Flex mb={{ ...rem(30) }} w='100%' justify='space-between' align='center'>
       {rendition[values?.filterValue]}
