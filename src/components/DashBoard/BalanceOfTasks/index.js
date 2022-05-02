@@ -103,6 +103,7 @@ const BalanceOfTasks = () => {
                 h='100%'
                 justify='space-between'
                 w='100%'
+                overflowY='scroll'
                 direction='column'
               >
                 {(allTasks || []).map(taskItem => (
