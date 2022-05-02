@@ -16,7 +16,6 @@ import { columns } from 'components/DashBoard/TasksList'
 import Spinner from 'components/FetchCard/Spinner'
 import Table from 'components/Table'
 import Layout from 'container/Layout'
-import { SearchInput } from 'container/Navbar'
 import useApi from 'context/useApi'
 import useAuth from 'context/useAuth'
 import useComponent from 'context/useComponent'
@@ -25,7 +24,7 @@ import moment from 'moment'
 import React from 'react'
 import { BsPlus } from 'react-icons/bs'
 import { useQuery } from 'react-query'
-import { FormSelect } from 'components/Form'
+import { FormInput, FormSelect } from 'components/Form'
 import { useFormik } from 'formik'
 import { prs, statuses } from 'components/Modals/TaskModal'
 
@@ -102,13 +101,14 @@ const TabTable = ({ defaultData, categories }) => {
   const [filterValue, setFilterValue] = React.useState('Name')
   const formik = useFormik({
     initialValues: {
+      name: '',
       category: '',
       priority: '',
       status: ''
     }
   })
 
-  console.log(sortValue, 'changinf')
+  const { values } = formik
 
   return (
     <Box w='100%'>
@@ -124,14 +124,51 @@ const TabTable = ({ defaultData, categories }) => {
       />
       <Table
         columns={columns}
-        data={defaultData?.sort((a, b) => {
-          const sortDecision = {
-            'First Added': new Date(a?.createdAt) - new Date(b?.createdAt),
-            'Last Added': new Date(b?.createdAt) - new Date(a?.createdAt)
-          }
-          console.log(sortDecision[sortValue])
-          return sortDecision[sortValue]
-        })}
+        data={defaultData
+          ?.sort((a, b) => {
+            const sortDecision = {
+              'First Added': new Date(a?.createdAt) - new Date(b?.createdAt),
+              'Last Added': new Date(b?.createdAt) - new Date(a?.createdAt)
+            }
+            return sortDecision[sortValue]
+          })
+          .filter(item => {
+            const filterDecision = {
+              Name: () => {
+                if (values?.name?.length > 2) {
+                  const columnData = values?.name?.replace(/[^A-Z0-9]/gi, '')
+                  return !!columnData.match(
+                    new RegExp(
+                      item?.name?.replace(/[^A-Z0-9]/gi, '').toLowerCase(),
+                      'i'
+                    )
+                  )
+                }
+                return true
+              },
+              Priority: () => {
+                if (values?.priority) {
+                  return values.priority === item.priority
+                }
+                return true
+              },
+              Category: () => {
+                if (values?.category) {
+                  return values.category === item.category?._id
+                }
+                return true
+              },
+              Status: () => {
+                if (values?.status) {
+                  console.log(values?.status, 'riches')
+
+                  return values.status === item.status
+                }
+                return true
+              }
+            }
+            return filterDecision[filterValue]()
+          })}
       />
     </Box>
   )
@@ -153,13 +190,28 @@ export const TaskFilter = ({
   categories,
   formik
 }) => {
-  const { values, errors, setFieldValue, setFieldTouched } = formik
+  const { values, errors, setFieldValue, setFieldTouched, handleChange } =
+    formik
   const rendition = {
-    Name: <SearchInput w={{ ...rem(300) }} h={{ ...rem(44) }} />,
+    Name: (
+      <FormInput
+        placeholder='Name your task'
+        id='name'
+        name='name'
+        bg='#F2F5FF 0% 0% no-repeat padding-box'
+        value={values.name}
+        error={errors.name}
+        onChange={handleChange}
+        setFieldTouched={setFieldTouched}
+        w={{ ...rem(300) }}
+        h={{ ...rem(44) }}
+      />
+    ),
     Category: (
       <FormSelect
         w={{ ...rem(300) }}
         placeholder='Select category'
+        background='#F2F5FF 0% 0% no-repeat padding-box'
         id='category'
         name='category'
         options={categories?.map(item => ({
@@ -180,6 +232,7 @@ export const TaskFilter = ({
         w={{ ...rem(300) }}
         h={{ ...rem(44) }}
         placeholder='Select priority'
+        background='#F2F5FF 0% 0% no-repeat padding-box'
         id='priority'
         name='priority'
         options={prs}
@@ -196,6 +249,7 @@ export const TaskFilter = ({
         w={{ ...rem(300) }}
         h={{ ...rem(44) }}
         placeholder='Select status'
+        background='#F2F5FF 0% 0% no-repeat padding-box'
         id='status'
         name='status'
         options={statuses}
@@ -227,13 +281,16 @@ TaskFilter.propTypes = {
   formik: PropTypes.shape({
     errors: PropTypes.shape({
       category: PropTypes.any,
+      name: PropTypes.any,
       priority: PropTypes.any,
       status: PropTypes.any
     }),
+    handleChange: PropTypes.any,
     setFieldTouched: PropTypes.any,
     setFieldValue: PropTypes.func,
     values: PropTypes.shape({
       category: PropTypes.any,
+      name: PropTypes.any,
       priority: PropTypes.any,
       status: PropTypes.any
     })
