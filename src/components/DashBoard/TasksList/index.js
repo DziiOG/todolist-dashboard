@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Checkbox, Flex, Icon, Tag, Text } from '@chakra-ui/react'
+import { Box, Checkbox, Flex, Icon, Text } from '@chakra-ui/react'
 import { rem } from 'helpers/misc'
 import { FiChevronRight } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
@@ -11,6 +11,19 @@ import Spinner from 'components/FetchCard/Spinner'
 import { useQuery } from 'react-query'
 import useApi from 'context/useApi'
 import useAuth from 'context/useAuth'
+
+const colors = [
+  {
+    color: '#677ACB66',
+    id: 'IN_PROGRESS'
+  },
+  {
+    color: '#F4FFF2',
+    id: 'COMPLETED'
+  },
+  { color: '#A867CB33', id: 'PENDING' },
+  { color: '#8A904833', id: 'RESCHEDULED' }
+]
 
 export const columns = [
   {
@@ -33,14 +46,16 @@ export const columns = [
   {
     name: 'Category',
     selector: row => (
-      <Tag
-        color='#29325A'
+      <Flex
+        justify='center'
+        align='center'
+        color={row?.category?.color}
         borderRadius={{ ...rem(10) }}
         p={3}
         bg={row.category.color}
       >
         {row.category.name}
-      </Tag>
+      </Flex>
     )
   },
   {
@@ -53,7 +68,20 @@ export const columns = [
   },
   {
     name: 'Status',
-    selector: 'status'
+    selector: row => (
+      <Flex
+        justify='center'
+        align='center'
+        color={colors?.find(item => item?.id === row?.status)?.color}
+        borderRadius={{ ...rem(10) }}
+        p={3}
+        bg={row.category.color}
+      >
+        <Text textTransform='capitalize'>
+          {row?.status?.replace('_', ' ')?.toLowerCase()}
+        </Text>
+      </Flex>
+    )
   },
   {
     overflow: false,
