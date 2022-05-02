@@ -14,6 +14,34 @@ import { useQuery, useQueryClient } from 'react-query'
 import Spinner from 'components/FetchCard/Spinner'
 import ModalWrapper from './ModalWrapper'
 
+export const frq = [
+  {
+    id: 'never',
+    name: 'never repeats'
+  },
+  { id: 'daily', name: 'repeats daily' },
+  { id: 'weekly', name: 'repeats weekly' },
+  { id: 'monthly', name: 'repeats monthly' },
+  { id: 'customize', name: 'customize' }
+]
+
+export const prs = [
+  {
+    id: 1,
+    name: 'None'
+  },
+  { id: 2, name: 'Low' },
+  { id: 3, name: 'Medium' },
+  { id: 4, name: 'High' }
+]
+
+export const statuses = [
+  { id: 'PENDING', name: 'Pending' },
+  { id: 'IN_PROGRESS', name: 'In progress' },
+  { id: 'COMPLETED', name: 'Completed' },
+  { id: 'RESCHEDULED', name: 'Rescheduled' }
+]
+
 const TaskModal = () => {
   const toast = useToast()
   const queryClient = useQueryClient()
@@ -72,34 +100,6 @@ const TaskModal = () => {
       staleTime: 90000
     }
   )
-
-  const frq = [
-    {
-      id: 'never',
-      name: 'never repeats'
-    },
-    { id: 'daily', name: 'repeats daily' },
-    { id: 'weekly', name: 'repeats weekly' },
-    { id: 'monthly', name: 'repeats monthly' },
-    { id: 'customize', name: 'customize' }
-  ]
-
-  const prs = [
-    {
-      id: 1,
-      name: 'None'
-    },
-    { id: 2, name: 'Low' },
-    { id: 3, name: 'Medium' },
-    { id: 4, name: 'High' }
-  ]
-
-  const statuses = [
-    { id: 'PENDING', name: 'Pending' },
-    { id: 'IN_PROGRESS', name: 'In progress' },
-    { id: 'COMPLETED', name: 'Completed' },
-    { id: 'RESCHEDULED', name: 'Rescheduled' }
-  ]
 
   const {
     values,

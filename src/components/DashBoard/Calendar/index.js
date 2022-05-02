@@ -45,7 +45,11 @@ function CalenderDashboard() {
                   const taskDateObj = moment(taskDate).format('MM-DD-YYYY')
                   return slot?.date === taskDateObj
                 })
-                .map(item => ({ name: item.name, task: item }))
+                .map(item => ({
+                  name: item.name,
+                  task: item,
+                  color: item?.category?.color
+                }))
             })),
             ...rest
           }}

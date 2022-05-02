@@ -20,6 +20,7 @@ import { rem } from 'helpers/misc'
 import CustomButton from 'components/Button'
 import { BsClock } from 'react-icons/bs'
 import useComponent from 'context/useComponent'
+import { frq } from 'components/Modals/TaskModal'
 import CalendarDateItem from './CalendarDateItem'
 
 const PopCanContainer = ({
@@ -29,7 +30,9 @@ const PopCanContainer = ({
   dateItem
 }) => {
   const ref = React.useRef()
+  const { selectedEvent } = useCalendar()
   const { handleModalClick } = useComponent()
+  console.log(selectedEvent, 'item')
 
   return (
     <GridItem key={(i => i)(index)} h='100%' w='100%'>
@@ -65,24 +68,29 @@ const PopCanContainer = ({
                 align='center'
                 justify='center'
                 w='42%'
-                color='#29325A'
+                color={selectedEvent?.category?.color || '#29325A'}
                 borderRadius={{ ...rem(10) }}
                 p={2}
-                bg={'#E58D8D33 0% 0% no-repeat padding-box'}
+                bg={`${
+                  selectedEvent?.category?.color || '#E58D8D'
+                }33 0% 0% no-repeat padding-box`}
               >
-                House
+                {selectedEvent?.category?.name}
               </Flex>
 
               <Flex
-                bg='#677ACB66 0% 0% no-repeat padding-box'
+                bg={`${
+                  selectedEvent?.category?.colors || '#677ACB'
+                }66 0% 0% no-repeat padding-box`}
                 align='center'
                 justify='center'
                 w='45%'
-                color='#29325A'
+                color={selectedEvent?.category?.color || '#29325A'}
                 borderRadius={{ ...rem(18) }}
                 p={1}
+                textTransform='capitalize'
               >
-                In Progress
+                {selectedEvent?.status?.toLowerCase()}
               </Flex>
             </Flex>
             <Box mb={3} mt={{ ...rem(13) }}>
@@ -93,7 +101,7 @@ const PopCanContainer = ({
                 fontSize={'lg'}
                 mb={{ md: 2 }}
               >
-                Send out email
+                {selectedEvent?.name}
               </Text>
               <Text
                 fontFamily='Avenir'
@@ -101,7 +109,7 @@ const PopCanContainer = ({
                 fontWeight={400}
                 fontSize={'md'}
               >
-                Remind Sarah about meeting
+                {selectedEvent?.description}
               </Text>
             </Box>
             <Flex
@@ -117,19 +125,27 @@ const PopCanContainer = ({
               <Box>
                 <Flex align='center'>
                   <Icon mr={2} as={BsClock} />
-                  <Text> 10:00AM </Text>
+                  <Text>
+                    {' '}
+                    {moment(selectedEvent?.dueDate).format('HH:mm A')}{' '}
+                  </Text>
                 </Flex>
               </Box>
               <Box>
                 <Flex align='center'>
                   <Icon mr={2} as={BsClock} />
-                  <Text> Repeats weekly </Text>
+                  <Text textTransform='capitalize'>
+                    {
+                      frq.find(item => item.id === selectedEvent?.frequency)
+                        ?.name
+                    }
+                  </Text>
                 </Flex>
               </Box>
             </Flex>
             <CustomButton
               onClick={() => {
-                handleModalClick('taskModal')
+                handleModalClick('taskModal', selectedEvent)
               }}
               borderRadius={{ ...rem(10) }}
               h={{ ...rem(40) }}

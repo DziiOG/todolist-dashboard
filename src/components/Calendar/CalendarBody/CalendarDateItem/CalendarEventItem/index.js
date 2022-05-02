@@ -3,14 +3,18 @@ import PropTypes from 'prop-types'
 import { Box, Flex, PopoverTrigger, Text } from '@chakra-ui/react'
 import { rem } from 'helpers/misc'
 import Button from 'components/Button'
+import useCalendar from 'context/useCalendar'
 
 const EventItem = ({ event = {}, myRef }) => {
+  const { setSelectedEVent } = useCalendar()
+
   const onClick = () => (event?.onEventClick ? event.onEventClick() : undefined)
   return (
     <Box
       as='button'
       onClick={e => {
         myRef?.current?.click()
+        setSelectedEVent(event?.task)
         if (onClick) {
           onClick(e)
         }

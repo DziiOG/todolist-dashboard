@@ -5,10 +5,13 @@ const CalendarContext = createContext()
 
 export const CalendarContextProvider = ({ engine, children }) => {
   const locks = [1, 8, 15, 22, 29]
+  const [selectedEvent, setSelectedEVent] = React.useState(undefined)
   return (
     <CalendarContext.Provider
       value={{
         locks,
+        setSelectedEVent,
+        selectedEvent,
         ...engine
       }}
     >
