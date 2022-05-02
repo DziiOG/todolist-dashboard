@@ -73,6 +73,8 @@ const Tasks = () => {
     }
   )
 
+  console.log(data?.data, 'items')
+
   return (
     <Layout disableSearch page={2}>
       <Spinner

@@ -49,7 +49,7 @@ export const columns = [
       <Flex
         justify='center'
         align='center'
-        color={row?.category?.color}
+        color={`${row?.category?.color}33`}
         borderRadius={{ ...rem(10) }}
         p={3}
         bg={row.category.color}
@@ -177,7 +177,14 @@ function TasksList() {
           borderRadius={{ ...rem(20) }}
           p={{ ...rem(20) }}
         >
-          <Table data={data?.data || []} columns={columns} />
+          <Table
+            data={
+              data?.data
+                ?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                .slice(0, 5) || []
+            }
+            columns={columns}
+          />
         </Box>
       </Box>
     </Spinner>
