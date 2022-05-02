@@ -40,7 +40,7 @@ const TaskModal = () => {
       try {
         setSubmitting(true)
         const res = modalData
-          ? await updateTask(values)
+          ? await updateTask(modalData?._id, values)
           : await createTask(values)
         await queryClient.invalidateQueries([`tasks_user${user?._id}`])
         toastSuccess(

@@ -1,6 +1,5 @@
 import axios from 'axios'
 import QueryString from 'query-string'
-import { replaceURI } from 'helpers/misc'
 /**
  *
  *
@@ -25,7 +24,7 @@ class HttpFacade {
       response => response,
       error => {
         if ([401, 403].includes(error?.response?.status)) {
-          replaceURI('AUTH', '/redirects?from=GROWER_ADMIN&off=false')
+          window.location.replace(`${window.location.origin}/authenticate`)
         }
         return Promise.reject(error.response)
       }
