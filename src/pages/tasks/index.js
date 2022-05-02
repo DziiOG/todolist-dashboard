@@ -137,13 +137,13 @@ const TabTable = ({ defaultData, categories }) => {
             const filterDecision = {
               Name: () => {
                 if (values?.name?.length > 2) {
-                  const columnData = values?.name?.replace(/[^A-Z0-9]/gi, '')
-                  return !!columnData.match(
-                    new RegExp(
-                      item?.name?.replace(/[^A-Z0-9]/gi, '').toLowerCase(),
-                      'i'
-                    )
-                  )
+                  const columnData = values?.name
+                    ?.replace(/[^A-Z0-9]/gi, '')
+                    ?.toLowerCase()
+                  return item?.name
+                    ?.replace(/[^A-Z0-9]/gi, '')
+                    .toLowerCase()
+                    ?.includes(columnData)
                 }
                 return true
               },
@@ -161,8 +161,6 @@ const TabTable = ({ defaultData, categories }) => {
               },
               Status: () => {
                 if (values?.status) {
-                  console.log(values?.status, 'riches')
-
                   return values.status === item.status
                 }
                 return true
