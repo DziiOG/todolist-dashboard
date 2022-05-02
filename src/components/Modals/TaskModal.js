@@ -71,7 +71,6 @@ const TaskModal = () => {
     ) => {
       try {
         setSubmitting(true)
-        console.log(values, 'itmsssss')
         const res = modalData
           ? await updateTask(modalData?._id, values)
           : await createTask(values)

@@ -33,7 +33,6 @@ const PopCanContainer = ({
   const ref = React.useRef()
   const { selectedEvent } = useCalendar()
   const { handleModalClick } = useComponent()
-  console.log(selectedEvent, 'item')
 
   return (
     <GridItem key={(i => i)(index)} h='100%' w='100%'>
