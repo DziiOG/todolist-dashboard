@@ -84,6 +84,7 @@ const Sidebar = ({ page }) => {
               ))}
             </Box>
             <SidebarItem
+              cursor='pointer'
               onClick={async () => {
                 try {
                   await logout()
